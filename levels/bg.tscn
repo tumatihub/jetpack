@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=4 uid="uid://cy64667b5qhnj"]
+
+[ext_resource type="Texture2D" uid="uid://bsb8nntc0de0u" path="res://assets/bg_elements/Flat/clouds2.png" id="2_ljpyx"]
+[ext_resource type="Texture2D" uid="uid://8f2pfp6ijdbf" path="res://assets/bg_elements/Flat/sky.png" id="2_vs7as"]
+[ext_resource type="Texture2D" uid="uid://wvtfqvt0x5s3" path="res://levels/foreground.png" id="3_3gbw2"]
+[ext_resource type="Texture2D" uid="uid://c8535ft4dd3qn" path="res://assets/bg_elements/Flat/pointy_mountains.png" id="3_rhy56"]
+[ext_resource type="Texture2D" uid="uid://byuctxmc6x7rx" path="res://assets/slice03_03.png" id="5_pux5f"]
+[ext_resource type="Texture2D" uid="uid://chj7mcc2v7wm0" path="res://assets/bg_elements/grass2.png" id="5_w2ems"]
+[ext_resource type="Texture2D" uid="uid://bl6xy5p2e2cfy" path="res://assets/bg_elements/grass4.png" id="6_2c5qo"]
+[ext_resource type="Texture2D" uid="uid://b7quat4pqd8dm" path="res://assets/bg_elements/grass5.png" id="7_hnrwi"]
+[ext_resource type="Texture2D" uid="uid://c3uu1exl5hhgx" path="res://assets/slice33_33.png" id="9_nfwb7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lga71"]
+texture = ExtResource("5_pux5f")
+texture_region_size = Vector2i(70, 70)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_v = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odirl"]
+texture = ExtResource("9_nfwb7")
+texture_region_size = Vector2i(70, 70)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_v = true
+
+[sub_resource type="TileSet" id="TileSet_1qvd7"]
+tile_size = Vector2i(70, 70)
+sources/0 = SubResource("TileSetAtlasSource_lga71")
+sources/5 = SubResource("TileSetAtlasSource_odirl")
+
+[node name="BG" type="Node2D"]
+
+[node name="Sky2" type="Sprite2D" parent="."]
+scale = Vector2(1.875, 1.05469)
+texture = ExtResource("2_vs7as")
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, -56)
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-50, 0)
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
+position = Vector2(0, 464)
+scale = Vector2(1.92, 2.25842)
+texture = ExtResource("2_ljpyx")
+centered = false
+
+[node name="Mountains" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, -56)
+repeat_size = Vector2(1920, 0)
+autoscroll = Vector2(-100, 0)
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Mountains"]
+self_modulate = Color(0.97, 0.97, 0.97, 1)
+position = Vector2(0, 720)
+scale = Vector2(1.91808, 1.90476)
+texture = ExtResource("3_rhy56")
+centered = false
+
+[node name="Hills" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, -56)
+repeat_size = Vector2(2000, 0)
+autoscroll = Vector2(-400, 0)
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Hills"]
+self_modulate = Color(0.83, 0.83, 0.83, 1)
+texture_repeat = 2
+texture = ExtResource("3_3gbw2")
+centered = false
+
+[node name="Floor" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, -56)
+repeat_size = Vector2(1960, 0)
+autoscroll = Vector2(-600, 0)
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+position = Vector2(144, 1032)
+scale = Vector2(1.855, 1.855)
+texture = ExtResource("5_w2ems")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Floor"]
+position = Vector2(1016, 1032)
+scale = Vector2(1.855, 1.855)
+texture = ExtResource("5_w2ems")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Floor"]
+position = Vector2(1168, 1024)
+scale = Vector2(1.855, 1.855)
+texture = ExtResource("6_2c5qo")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Floor"]
+position = Vector2(456, 1024)
+scale = Vector2(1.855, 1.855)
+texture = ExtResource("7_hnrwi")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Floor"]
+tile_map_data = PackedByteArray("AAAAAA8AAAAAAAAAAAABAA8AAAAAAAAAAAACAA8AAAAAAAAAAAADAA8AAAAAAAAAAAAEAA8AAAAAAAAAAAAFAA8AAAAAAAAAAAAGAA8AAAAAAAAAAAAHAA8AAAAAAAAAAAAIAA8AAAAAAAAAAAAJAA8AAAAAAAAAAAAKAA8AAAAAAAAAAAALAA8AAAAAAAAAAAAMAA8AAAAAAAAAAAANAA8AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAA8AAAAAAAAAAAAQAA8AAAAAAAAAAAARAA8AAAAAAAAAAAASAA8AAAAAAAAAAAATAA8AAAAAAAAAAAAUAA8AAAAAAAAAAAAVAA8AAAAAAAAAAAAWAA8AAAAAAAAAAAAXAA8AAAAAAAAAAAAYAA8AAAAAAAAAAAAZAA8AAAAAAAAAAAAaAA8AAAAAAAAAAAAbAA8AAAAAAAAAAAAAABAABQAAAAAAAAABABAABQAAAAAAAAACABAABQAAAAAAAAADABAABQAAAAAAAAAEABAABQAAAAAAAAAFABAABQAAAAAAAAAGABAABQAAAAAAAAAHABAABQAAAAAAAAAIABAABQAAAAAAAAAJABAABQAAAAAAAAAKABAABQAAAAAAAAALABAABQAAAAAAAAAMABAABQAAAAAAAAANABAABQAAAAAAAAAOABAABQAAAAAAAAAPABAABQAAAAAAAAAQABAABQAAAAAAAAARABAABQAAAAAAAAASABAABQAAAAAAAAATABAABQAAAAAAAAAUABAABQAAAAAAAAAVABAABQAAAAAAAAAWABAABQAAAAAAAAAXABAABQAAAAAAAAAYABAABQAAAAAAAAAZABAABQAAAAAAAAAaABAABQAAAAAAAAAbABAABQAAAAAAAAAAAAEAAAAAAAAAAQABAAEAAAAAAAAAAQACAAEAAAAAAAAAAQADAAEAAAAAAAAAAQAEAAEAAAAAAAAAAQAFAAEAAAAAAAAAAQAGAAEAAAAAAAAAAQAHAAEAAAAAAAAAAQAIAAEAAAAAAAAAAQAJAAEAAAAAAAAAAQAKAAEAAAAAAAAAAQALAAEAAAAAAAAAAQAMAAEAAAAAAAAAAQANAAEAAAAAAAAAAQAOAAEAAAAAAAAAAQAPAAEAAAAAAAAAAQAQAAEAAAAAAAAAAQARAAEAAAAAAAAAAQASAAEAAAAAAAAAAQATAAEAAAAAAAAAAQAUAAEAAAAAAAAAAQAVAAEAAAAAAAAAAQAWAAEAAAAAAAAAAQAXAAEAAAAAAAAAAQAYAAEAAAAAAAAAAQAZAAEAAAAAAAAAAQAaAAEAAAAAAAAAAQAbAAEAAAAAAAAAAQAAAAAABQAAAAAAAQABAAAABQAAAAAAAQACAAAABQAAAAAAAQADAAAABQAAAAAAAQAEAAAABQAAAAAAAQAFAAAABQAAAAAAAQAGAAAABQAAAAAAAQAHAAAABQAAAAAAAQAIAAAABQAAAAAAAQAJAAAABQAAAAAAAQAKAAAABQAAAAAAAQALAAAABQAAAAAAAQAMAAAABQAAAAAAAQANAAAABQAAAAAAAQAOAAAABQAAAAAAAQAPAAAABQAAAAAAAQAQAAAABQAAAAAAAQARAAAABQAAAAAAAQASAAAABQAAAAAAAQATAAAABQAAAAAAAQAUAAAABQAAAAAAAQAVAAAABQAAAAAAAQAWAAAABQAAAAAAAQAXAAAABQAAAAAAAQAYAAAABQAAAAAAAQAZAAAABQAAAAAAAQAaAAAABQAAAAAAAQAbAAAABQAAAAAAAQA=")
+tile_set = SubResource("TileSet_1qvd7")

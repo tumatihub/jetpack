@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bbj2uf2wmu2s6" path="res://entities/player/shipGreen_manned.png" id="2_d884w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6e65m"]
-radius = 30.0167
+radius = 58.0775
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_kx7yn")
@@ -15,5 +15,4 @@ script = ExtResource("1_kx7yn")
 shape = SubResource("CircleShape2D_6e65m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_d884w")

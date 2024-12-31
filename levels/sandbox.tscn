@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://no6gj2dgu5sl"]
+[gd_scene load_steps=3 format=3 uid="uid://no6gj2dgu5sl"]
 
 [ext_resource type="PackedScene" uid="uid://yiojagcmj4p1" path="res://entities/player/player.tscn" id="1_dbpqp"]
+[ext_resource type="PackedScene" uid="uid://cy64667b5qhnj" path="res://levels/bg.tscn" id="1_htlry"]
 
 [node name="Sandbox" type="Node2D"]
 
+[node name="BG" parent="." instance=ExtResource("1_htlry")]
+
 [node name="Player" parent="." instance=ExtResource("1_dbpqp")]
-position = Vector2(526, 271)
+position = Vector2(160, 280)
