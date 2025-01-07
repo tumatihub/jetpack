@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgpu724mm3tc4"]
+
+[ext_resource type="Script" path="res://obstacles/laser_barrier/laser_barrier.gd" id="1_k5ts2"]
+[ext_resource type="Texture2D" uid="uid://d16iqxjsbff5v" path="res://obstacles/laser_barrier/art/laser_shooter.png" id="1_lxk36"]
+[ext_resource type="Texture2D" uid="uid://km0guf4lj1qd" path="res://obstacles/laser_barrier/art/laser.png" id="2_unrvl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84j8n"]
+size = Vector2(288, 20)
+
+[node name="LaserBarrier" type="Node2D"]
+script = ExtResource("1_k5ts2")
+
+[node name="LeftShooter" type="Sprite2D" parent="."]
+position = Vector2(-128, 0)
+rotation = 1.5708
+texture = ExtResource("1_lxk36")
+
+[node name="RightShooter" type="Sprite2D" parent="."]
+position = Vector2(128, 0)
+rotation = -1.5708
+texture = ExtResource("1_lxk36")
+
+[node name="Beam2" type="Node2D" parent="."]
+modulate = Color(1, 0.687333, 0.33, 1)
+position = Vector2(-104, 0)
+
+[node name="Left" type="Sprite2D" parent="Beam2"]
+texture_repeat = 3
+rotation = -1.5708
+texture = ExtResource("2_unrvl")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 16)
+
+[node name="Center" type="Sprite2D" parent="Beam2"]
+texture_repeat = 3
+position = Vector2(56, 0)
+rotation = -1.5708
+texture = ExtResource("2_unrvl")
+region_enabled = true
+region_rect = Rect2(0, 16, 20, 96)
+
+[node name="Center2" type="Sprite2D" parent="Beam2"]
+texture_repeat = 3
+position = Vector2(152, 0)
+rotation = -1.5708
+texture = ExtResource("2_unrvl")
+region_enabled = true
+region_rect = Rect2(0, 16, 20, 96)
+
+[node name="Right" type="Sprite2D" parent="Beam2"]
+texture_repeat = 3
+position = Vector2(208, 0)
+rotation = -1.5708
+texture = ExtResource("2_unrvl")
+region_enabled = true
+region_rect = Rect2(0, 112, 20, 16)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(14.4, 1.6)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_84j8n")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

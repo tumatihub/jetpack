@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://no6gj2dgu5sl"]
+[gd_scene load_steps=4 format=3 uid="uid://no6gj2dgu5sl"]
 
 [ext_resource type="PackedScene" uid="uid://yiojagcmj4p1" path="res://entities/player/player.tscn" id="1_dbpqp"]
 [ext_resource type="PackedScene" uid="uid://cy64667b5qhnj" path="res://levels/bg.tscn" id="1_htlry"]
+[ext_resource type="PackedScene" uid="uid://dgpu724mm3tc4" path="res://obstacles/laser_barrier/laser_barrier.tscn" id="3_6ie7o"]
 
 [node name="Sandbox" type="Node2D"]
 
@@ -9,3 +10,16 @@
 
 [node name="Player" parent="." instance=ExtResource("1_dbpqp")]
 position = Vector2(160, 280)
+
+[node name="LaserBarrier" parent="." instance=ExtResource("3_6ie7o")]
+position = Vector2(984, 256)
+rotation = 1.57079
+
+[node name="LaserBarrier2" parent="." instance=ExtResource("3_6ie7o")]
+position = Vector2(1360, 792)
+rotation = 1.57079
+
+[node name="LaserBarrier3" parent="." instance=ExtResource("3_6ie7o")]
+position = Vector2(1768, 352)
+rotation = 0.785397
+_spin = true
