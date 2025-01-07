@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnItem" load_steps=3 format=3 uid="uid://bvo1anlqh8pn6"]
+
+[ext_resource type="PackedScene" uid="uid://dq4ndx4q65eu1" path="res://obstacles/laser_barrier/laser_barrier_vertical.tscn" id="1_wr5e7"]
+[ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="2_a8ilx"]
+
+[resource]
+script = ExtResource("2_a8ilx")
+scene = ExtResource("1_wr5e7")
+time_before_next = 2.0
+possible_positions = Array[Vector2]([Vector2(2176, 256), Vector2(2176, 800), Vector2(2176, 528)])

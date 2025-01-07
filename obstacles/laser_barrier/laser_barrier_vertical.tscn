@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq4ndx4q65eu1"]
+
+[ext_resource type="PackedScene" uid="uid://dgpu724mm3tc4" path="res://obstacles/laser_barrier/laser_barrier.tscn" id="1_ycij8"]
+
+[node name="LaserBarrierVertical" instance=ExtResource("1_ycij8")]
+rotation = 1.57079
