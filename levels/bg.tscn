@@ -32,81 +32,79 @@ tile_size = Vector2i(70, 70)
 sources/0 = SubResource("TileSetAtlasSource_lga71")
 sources/5 = SubResource("TileSetAtlasSource_odirl")
 
-[node name="BG" type="Node2D" node_paths=PackedStringArray("_clouds", "_mountains", "_hills", "_floor")]
+[node name="BG" type="Node2D" node_paths=PackedStringArray("_parallax_bg")]
 script = ExtResource("1_4r72n")
-_clouds = NodePath("Clouds")
-_mountains = NodePath("Mountains")
-_hills = NodePath("Hills")
-_floor = NodePath("Floor")
+_parallax_bg = NodePath("ParallaxBackground")
 
-[node name="Sky2" type="Sprite2D" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -10
+scroll_offset = Vector2(-600, 0)
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="Sky2" type="Sprite2D" parent="ParallaxBackground/Sky"]
 scale = Vector2(1.875, 1.05469)
 texture = ExtResource("2_vs7as")
 centered = false
 
-[node name="Clouds" type="Parallax2D" parent="."]
-scroll_offset = Vector2(0, -56)
-repeat_size = Vector2(1920, 0)
-autoscroll = Vector2(-50, 0)
-ignore_camera_scroll = true
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
-position = Vector2(0, 464)
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Clouds"]
+position = Vector2(0, 408)
 scale = Vector2(1.92, 2.25842)
 texture = ExtResource("2_ljpyx")
 centered = false
 
-[node name="Mountains" type="Parallax2D" parent="."]
-scroll_offset = Vector2(0, -56)
-repeat_size = Vector2(1920, 0)
-autoscroll = Vector2(-100, 0)
-ignore_camera_scroll = true
+[node name="Mountains" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.16, 0.16)
+motion_mirroring = Vector2(1920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Mountains"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountains"]
 self_modulate = Color(0.97, 0.97, 0.97, 1)
 position = Vector2(0, 720)
 scale = Vector2(1.91808, 1.90476)
 texture = ExtResource("3_rhy56")
 centered = false
+offset = Vector2(0, -25.95)
 
-[node name="Hills" type="Parallax2D" parent="."]
-scroll_offset = Vector2(0, -56)
-repeat_size = Vector2(2000, 0)
-autoscroll = Vector2(-400, 0)
-ignore_camera_scroll = true
+[node name="Hills" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.66, 0.66)
+motion_mirroring = Vector2(2000, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Hills"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Hills"]
 self_modulate = Color(0.83, 0.83, 0.83, 1)
 texture_repeat = 2
 texture = ExtResource("3_3gbw2")
 centered = false
+offset = Vector2(0, -56)
 
-[node name="Floor" type="Parallax2D" parent="."]
-scroll_offset = Vector2(0, -56)
-repeat_size = Vector2(1960, 0)
-autoscroll = Vector2(-600, 0)
-ignore_camera_scroll = true
+[node name="Floor" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1960, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Floor"]
-position = Vector2(144, 1032)
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Floor"]
+position = Vector2(144, 968)
 scale = Vector2(1.855, 1.855)
 texture = ExtResource("5_w2ems")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Floor"]
-position = Vector2(1016, 1032)
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/Floor"]
+position = Vector2(1016, 968)
 scale = Vector2(1.855, 1.855)
 texture = ExtResource("5_w2ems")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Floor"]
-position = Vector2(1168, 1024)
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/Floor"]
+position = Vector2(1168, 968)
 scale = Vector2(1.855, 1.855)
 texture = ExtResource("6_2c5qo")
 
-[node name="Sprite2D4" type="Sprite2D" parent="Floor"]
-position = Vector2(456, 1024)
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/Floor"]
+position = Vector2(456, 968)
 scale = Vector2(1.855, 1.855)
 texture = ExtResource("7_hnrwi")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Floor"]
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/Floor"]
+position = Vector2(0, -56)
 tile_map_data = PackedByteArray("AAAAAA8AAAAAAAAAAAABAA8AAAAAAAAAAAACAA8AAAAAAAAAAAADAA8AAAAAAAAAAAAEAA8AAAAAAAAAAAAFAA8AAAAAAAAAAAAGAA8AAAAAAAAAAAAHAA8AAAAAAAAAAAAIAA8AAAAAAAAAAAAJAA8AAAAAAAAAAAAKAA8AAAAAAAAAAAALAA8AAAAAAAAAAAAMAA8AAAAAAAAAAAANAA8AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAA8AAAAAAAAAAAAQAA8AAAAAAAAAAAARAA8AAAAAAAAAAAASAA8AAAAAAAAAAAATAA8AAAAAAAAAAAAUAA8AAAAAAAAAAAAVAA8AAAAAAAAAAAAWAA8AAAAAAAAAAAAXAA8AAAAAAAAAAAAYAA8AAAAAAAAAAAAZAA8AAAAAAAAAAAAaAA8AAAAAAAAAAAAbAA8AAAAAAAAAAAAAABAABQAAAAAAAAABABAABQAAAAAAAAACABAABQAAAAAAAAADABAABQAAAAAAAAAEABAABQAAAAAAAAAFABAABQAAAAAAAAAGABAABQAAAAAAAAAHABAABQAAAAAAAAAIABAABQAAAAAAAAAJABAABQAAAAAAAAAKABAABQAAAAAAAAALABAABQAAAAAAAAAMABAABQAAAAAAAAANABAABQAAAAAAAAAOABAABQAAAAAAAAAPABAABQAAAAAAAAAQABAABQAAAAAAAAARABAABQAAAAAAAAASABAABQAAAAAAAAATABAABQAAAAAAAAAUABAABQAAAAAAAAAVABAABQAAAAAAAAAWABAABQAAAAAAAAAXABAABQAAAAAAAAAYABAABQAAAAAAAAAZABAABQAAAAAAAAAaABAABQAAAAAAAAAbABAABQAAAAAAAAAAAAEAAAAAAAAAAQABAAEAAAAAAAAAAQACAAEAAAAAAAAAAQADAAEAAAAAAAAAAQAEAAEAAAAAAAAAAQAFAAEAAAAAAAAAAQAGAAEAAAAAAAAAAQAHAAEAAAAAAAAAAQAIAAEAAAAAAAAAAQAJAAEAAAAAAAAAAQAKAAEAAAAAAAAAAQALAAEAAAAAAAAAAQAMAAEAAAAAAAAAAQANAAEAAAAAAAAAAQAOAAEAAAAAAAAAAQAPAAEAAAAAAAAAAQAQAAEAAAAAAAAAAQARAAEAAAAAAAAAAQASAAEAAAAAAAAAAQATAAEAAAAAAAAAAQAUAAEAAAAAAAAAAQAVAAEAAAAAAAAAAQAWAAEAAAAAAAAAAQAXAAEAAAAAAAAAAQAYAAEAAAAAAAAAAQAZAAEAAAAAAAAAAQAaAAEAAAAAAAAAAQAbAAEAAAAAAAAAAQAAAAAABQAAAAAAAQABAAAABQAAAAAAAQACAAAABQAAAAAAAQADAAAABQAAAAAAAQAEAAAABQAAAAAAAQAFAAAABQAAAAAAAQAGAAAABQAAAAAAAQAHAAAABQAAAAAAAQAIAAAABQAAAAAAAQAJAAAABQAAAAAAAQAKAAAABQAAAAAAAQALAAAABQAAAAAAAQAMAAAABQAAAAAAAQANAAAABQAAAAAAAQAOAAAABQAAAAAAAQAPAAAABQAAAAAAAQAQAAAABQAAAAAAAQARAAAABQAAAAAAAQASAAAABQAAAAAAAQATAAAABQAAAAAAAQAUAAAABQAAAAAAAQAVAAAABQAAAAAAAQAWAAAABQAAAAAAAQAXAAAABQAAAAAAAQAYAAAABQAAAAAAAQAZAAAABQAAAAAAAQAaAAAABQAAAAAAAQAbAAAABQAAAAAAAQA=")
 tile_set = SubResource("TileSet_1qvd7")
