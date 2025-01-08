@@ -1,7 +1,7 @@
 class_name Player
 extends Node2D
 
-const GRAVITY := 980
+@export var _gravity := 980
 @export var _thrust_force: float = 2000
 
 var _velocity: float
@@ -10,7 +10,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("thrust"):
 		_velocity -= _thrust_force * delta
 	
-	_velocity += GRAVITY * delta
+	_velocity += _gravity * delta
 	
 	global_position.y += _velocity * delta
 

@@ -12,7 +12,9 @@
 [node name="BG" parent="." instance=ExtResource("1_htlry")]
 
 [node name="Player" parent="." instance=ExtResource("1_dbpqp")]
-position = Vector2(160, 280)
+position = Vector2(400, 280)
+_gravity = 2000
+_thrust_force = 4000.0
 
 [node name="LaserBarrier" parent="." instance=ExtResource("3_6ie7o")]
 visible = false

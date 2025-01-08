@@ -5,6 +5,10 @@ extends Node2D
 
 var _speed: float = 600.0
 
+func _ready() -> void:
+	_speed = GameManager.get_speed()
+	GameManager.speed_raised.connect(_on_speed_raised)
+
 func _process(delta: float) -> void:
 	global_position += Vector2.LEFT * delta * _get_speed()
 
@@ -22,3 +26,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func _destroy() -> void:
 	queue_free()
+
+func _on_speed_raised(current_speed: float) -> void:
+	_speed = current_speed

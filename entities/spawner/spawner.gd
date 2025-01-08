@@ -13,7 +13,7 @@ func spawn() -> void:
 	var instance := item.scene.instantiate() as Node2D
 	add_child(instance)
 	instance.global_position = item.possible_positions.pick_random()
-	_timer.start(item.time_before_next)
+	_timer.start(item.time_before_next * GameManager.get_start_speed()/GameManager.get_speed())
 
 func _on_timer_timeout() -> void:
 	spawn()
