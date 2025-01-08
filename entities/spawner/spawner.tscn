@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbyo4de62tgva"]
+[gd_scene load_steps=8 format=3 uid="uid://dbyo4de62tgva"]
 
 [ext_resource type="Script" path="res://entities/spawner/spawner.gd" id="1_omlbp"]
 [ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="2_l8ehh"]
 [ext_resource type="Resource" uid="uid://dcgvnkd8e5y5c" path="res://obstacles/laser_barrier/resources/laser_barrier.tres" id="3_opx8m"]
 [ext_resource type="Resource" uid="uid://ffigbgrbun4l" path="res://obstacles/laser_barrier/resources/laser_barrier_spin.tres" id="4_c8vr8"]
 [ext_resource type="Resource" uid="uid://bvo1anlqh8pn6" path="res://obstacles/laser_barrier/resources/laser_barrier_vertical.tres" id="5_wb2om"]
+[ext_resource type="Resource" uid="uid://dlp7c2p8ltlf7" path="res://entities/coin/resources/coin_group.tres" id="6_fkrqb"]
+[ext_resource type="Resource" uid="uid://2x83idy2pqpj" path="res://entities/coin/resources/coin_group_large.tres" id="7_4bpov"]
 
 [node name="Spawner" type="Node2D" node_paths=PackedStringArray("_timer")]
 script = ExtResource("1_omlbp")
-_obstacles = Array[ExtResource("2_l8ehh")]([ExtResource("3_opx8m"), ExtResource("4_c8vr8"), ExtResource("5_wb2om")])
+_obstacles = Array[ExtResource("2_l8ehh")]([ExtResource("3_opx8m"), ExtResource("4_c8vr8"), ExtResource("5_wb2om"), ExtResource("6_fkrqb"), ExtResource("7_4bpov")])
 _timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]

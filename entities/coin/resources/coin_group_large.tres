@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnItem" load_steps=3 format=3 uid="uid://2x83idy2pqpj"]
+
+[ext_resource type="PackedScene" uid="uid://b6i0ejs3tqsuo" path="res://entities/coin/coin_group_large.tscn" id="1_lyhx1"]
+[ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="2_p58xg"]
+
+[resource]
+script = ExtResource("2_p58xg")
+scene = ExtResource("1_lyhx1")
+time_before_next = 4.0
+possible_positions = Array[Vector2]([Vector2(2656, 240), Vector2(2656, 760)])
