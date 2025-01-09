@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84j8n"]
 size = Vector2(288, 20)
 
-[node name="LaserBarrier" type="Node2D"]
+[node name="LaserBarrier" type="Node2D" groups=["Obstacle"]]
 script = ExtResource("1_k5ts2")
 
 [node name="LeftShooter" type="Sprite2D" parent="."]

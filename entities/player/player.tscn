@@ -3,19 +3,25 @@
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_kx7yn"]
 [ext_resource type="Texture2D" uid="uid://bbj2uf2wmu2s6" path="res://entities/player/shipGreen_manned.png" id="2_d884w"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6e65m"]
-radius = 58.0775
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olaif"]
+radius = 46.0
+height = 108.0
 
 [node name="Player" type="Node2D"]
 z_index = 100
 script = ExtResource("1_kx7yn")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d884w")
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 13
+collision_priority = 10.0
+priority = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_6e65m")
+shape = SubResource("CapsuleShape2D_olaif")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_d884w")
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

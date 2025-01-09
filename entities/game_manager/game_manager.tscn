@@ -6,8 +6,8 @@
 script = ExtResource("1_oqrf8")
 _max_speed = 1500.0
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+[node name="RaiseSpeedTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="RaiseSpeedTimer" to="." method="_on_timer_timeout"]
