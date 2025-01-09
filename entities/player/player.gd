@@ -31,8 +31,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 		get_tree().quit()
 
 func _die() -> void:
-	if _is_dead:
-		return
 	_is_dead = true
 	_velocity = 0
 	get_tree().create_timer(3).timeout.connect(_on_death_timeout)
@@ -56,6 +54,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	_bounce()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if _is_dead:
+		return
 	if area.owner.is_in_group("Obstacle"):
-		print(area.owner.name)
 		_die()
+	elif area.owner is Coin:
+		var coin: Coin = area.owner as Coin
+		GameManager.score(coin.get_score())

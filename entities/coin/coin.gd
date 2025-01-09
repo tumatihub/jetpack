@@ -2,8 +2,12 @@ class_name Coin
 extends Node2D
 
 @export var _animation_player: AnimationPlayer
+@export var _score: int = 1
 
 var _speed: float = 600.0
+
+func get_score() -> int:
+	return _score
 
 func _ready() -> void:
 	_speed = GameManager.get_speed()
