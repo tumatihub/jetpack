@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwwedy5v0x7h6"]
+
+[ext_resource type="Script" path="res://entities/missile_launcher/missile_launcher.gd" id="1_w0wg6"]
+[ext_resource type="PackedScene" uid="uid://b4wxaxf5ttrw1" path="res://entities/missile_launcher/missile.tscn" id="2_qq2tu"]
+
+[node name="MissileLauncher" type="Node2D"]
+script = ExtResource("1_w0wg6")
+_missile_scene = ExtResource("2_qq2tu")

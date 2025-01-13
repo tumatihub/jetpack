@@ -12,6 +12,9 @@ var _is_bouncing: bool = false
 var _bounce_time: float = 0.2
 var _bounce_cooldown: float = 0
 
+func _ready() -> void:
+	GameManager.set_player(self)
+
 func _process(delta: float) -> void:
 	if _bounce_cooldown > 0:
 		_bounce_cooldown -= delta

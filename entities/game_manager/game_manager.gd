@@ -11,8 +11,15 @@ signal record_updated(record: int)
 var _current_score: int
 var _save_file: String = "save.sav"
 var _current_record: int
+var _player: Player
 
 @onready var _current_speed: float = _start_speed
+
+func set_player(player: Player) -> void:
+	_player = player
+
+func get_player() -> Player:
+	return _player
 
 func _ready() -> void:
 	var record := _load_record()

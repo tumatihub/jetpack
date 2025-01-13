@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnItem" load_steps=3 format=3 uid="uid://bcauj8diorjb4"]
+
+[ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="1_iaqpw"]
+[ext_resource type="PackedScene" uid="uid://dwwedy5v0x7h6" path="res://entities/missile_launcher/missile_launcher.tscn" id="1_m8le6"]
+
+[resource]
+script = ExtResource("1_iaqpw")
+scene = ExtResource("1_m8le6")
+time_before_next = 1.0
+possible_positions = Array[Vector2]([Vector2(2176, 528)])
