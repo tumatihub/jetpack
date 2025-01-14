@@ -12,7 +12,8 @@
 
 [node name="Spawner" type="Node2D" node_paths=PackedStringArray("_timer")]
 script = ExtResource("1_omlbp")
-_obstacles = Array[ExtResource("2_l8ehh")]([ExtResource("3_opx8m"), ExtResource("4_c8vr8"), ExtResource("5_wb2om"), ExtResource("6_fkrqb"), ExtResource("7_4bpov"), ExtResource("8_ttwt4"), ExtResource("9_rkw4i")])
+_obstacles = Array[ExtResource("2_l8ehh")]([ExtResource("3_opx8m"), ExtResource("4_c8vr8"), ExtResource("5_wb2om"), ExtResource("6_fkrqb"), ExtResource("7_4bpov"), ExtResource("8_ttwt4")])
+_items = Array[ExtResource("2_l8ehh")]([ExtResource("9_rkw4i")])
 _timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
