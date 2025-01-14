@@ -14,6 +14,12 @@ var _bounce_time: float = 0.2
 var _bounce_cooldown: float = 0
 var _shield_active: bool = false
 
+func take_damage() -> void:
+	if _shield_active:
+			deactivate_shield()
+	else:
+		_die()
+
 func activate_shield() -> void:
 	_shield_sprite.visible = true
 	_shield_active = true

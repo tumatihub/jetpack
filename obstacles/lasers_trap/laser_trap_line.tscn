@@ -1,0 +1,273 @@
+[gd_scene load_steps=12 format=3 uid="uid://btbjrufd0hjma"]
+
+[ext_resource type="Texture2D" uid="uid://bqg07lahon10e" path="res://obstacles/lasers_trap/art/laserRedHorizontal.png" id="1_61s0f"]
+[ext_resource type="Script" path="res://obstacles/lasers_trap/laser_trap_line.gd" id="1_uuy25"]
+[ext_resource type="Texture2D" uid="uid://mvvqj6xkdgwe" path="res://obstacles/lasers_trap/art/laserUp.png" id="2_6uhrk"]
+[ext_resource type="Texture2D" uid="uid://dm7lpet32kq62" path="res://obstacles/lasers_trap/art/circle_02.png" id="3_evc2i"]
+
+[sub_resource type="Animation" id="Animation_8qlx2"]
+resource_name = "shoot"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCannon/Circle:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.13, 0.13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCannon/Circle:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.933333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.13, 0.13)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Laser:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.933333, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(24, 0.2), Vector2(24, 1.535)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.933333, 1, 1.36667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Laser:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.36667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"check_player_collision"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_38oem"]
+resource_name = "enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCannon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-50, 0), Vector2(100, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCannon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1970, 0), Vector2(1820, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r40fy"]
+resource_name = "exit"
+
+[sub_resource type="Animation" id="Animation_fcnov"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LeftCannon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-50, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightCannon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1970, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LeftCannon/Circle:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RightCannon/Circle:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Laser:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 0.2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Area2D:monitorable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Laser:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hk6j"]
+_data = {
+"RESET": SubResource("Animation_fcnov"),
+"enter": SubResource("Animation_38oem"),
+"exit": SubResource("Animation_r40fy"),
+"shoot": SubResource("Animation_8qlx2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnujd"]
+size = Vector2(1650, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8t33"]
+size = Vector2(1650, 20)
+
+[node name="LaserTrapLine" type="Node2D" node_paths=PackedStringArray("_animation_player", "_shape_cast") groups=["Obstacle"]]
+position = Vector2(0, 160)
+script = ExtResource("1_uuy25")
+_animation_player = NodePath("AnimationPlayer")
+_shape_cast = NodePath("ShapeCast2D")
+
+[node name="Laser" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 0.4, 0.4, 1)
+z_index = -10
+position = Vector2(960, 0)
+scale = Vector2(24, 0.2)
+texture = ExtResource("1_61s0f")
+
+[node name="LeftCannon" type="Sprite2D" parent="."]
+position = Vector2(-50, 0)
+rotation = 1.5708
+texture = ExtResource("2_6uhrk")
+
+[node name="Circle" type="Sprite2D" parent="LeftCannon"]
+self_modulate = Color(1, 0.358333, 0.23, 1)
+z_index = -1
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_evc2i")
+
+[node name="RightCannon" type="Sprite2D" parent="."]
+position = Vector2(1970, 0)
+rotation = -1.5708
+texture = ExtResource("2_6uhrk")
+
+[node name="Circle" type="Sprite2D" parent="RightCannon"]
+self_modulate = Color(1, 0.358333, 0.23, 1)
+z_index = -1
+rotation = -3.14159
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_evc2i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8hk6j")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(961, 0)
+shape = SubResource("RectangleShape2D_wnujd")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(961, 0)
+shape = SubResource("RectangleShape2D_x8t33")
+exclude_parent = false
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bndmmi8iyacgs"]
+
+[ext_resource type="Script" path="res://obstacles/lasers_trap/lasers_trap.gd" id="1_yt6j2"]
+[ext_resource type="Script" path="res://obstacles/lasers_trap/shoot_group.gd" id="2_iji4i"]
+[ext_resource type="PackedScene" uid="uid://btbjrufd0hjma" path="res://obstacles/lasers_trap/laser_trap_line.tscn" id="2_rub7u"]
+
+[sub_resource type="Resource" id="Resource_fa53u"]
+script = ExtResource("2_iji4i")
+traps = Array[int]([0, 1, 2, 3])
+
+[node name="LasersTrap" type="Node2D"]
+script = ExtResource("1_yt6j2")
+_shoot_groups = Array[ExtResource("2_iji4i")]([SubResource("Resource_fa53u")])
+
+[node name="LaserTrapLine" parent="." instance=ExtResource("2_rub7u")]
+position = Vector2(0, 150)
+
+[node name="LaserTrapLine2" parent="." instance=ExtResource("2_rub7u")]
+position = Vector2(0, 300)
+
+[node name="LaserTrapLine3" parent="." instance=ExtResource("2_rub7u")]
+position = Vector2(0, 450)
+
+[node name="LaserTrapLine4" parent="." instance=ExtResource("2_rub7u")]
+position = Vector2(0, 600)
+
+[node name="LaserTrapLine5" parent="." instance=ExtResource("2_rub7u")]
+position = Vector2(0, 750)
+
+[node name="LaserTrapLine6" parent="." instance=ExtResource("2_rub7u")]
+position = Vector2(0, 900)

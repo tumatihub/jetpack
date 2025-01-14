@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpawnItem" load_steps=3 format=3 uid="uid://bd2et3xra322"]
+
+[ext_resource type="PackedScene" uid="uid://dq3no5xgx0dmd" path="res://obstacles/lasers_trap/lasers_trap_down.tscn" id="1_nwuwu"]
+[ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="2_r8tp7"]
+
+[resource]
+script = ExtResource("2_r8tp7")
+scene = ExtResource("1_nwuwu")
+time_before_next = 4.0
+possible_positions = Array[Vector2]([Vector2(0, 0)])
+use_absolute_time = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbyo4de62tgva"]
+[gd_scene load_steps=13 format=3 uid="uid://dbyo4de62tgva"]
 
 [ext_resource type="Script" path="res://entities/spawner/spawner.gd" id="1_omlbp"]
 [ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="2_l8ehh"]
@@ -9,11 +9,15 @@
 [ext_resource type="Resource" uid="uid://2x83idy2pqpj" path="res://entities/coin/resources/coin_group_large.tres" id="7_4bpov"]
 [ext_resource type="Resource" uid="uid://bcauj8diorjb4" path="res://entities/missile_launcher/resources/missile_launcher.tres" id="8_ttwt4"]
 [ext_resource type="Resource" uid="uid://cb6nuuhyiknf2" path="res://entities/items/resources/shield.tres" id="9_rkw4i"]
+[ext_resource type="Resource" uid="uid://cqs5svhoqed1r" path="res://obstacles/lasers_trap/resources/laser_trap_full.tres" id="10_b5fsg"]
+[ext_resource type="Resource" uid="uid://bd2et3xra322" path="res://obstacles/lasers_trap/resources/laser_trap_down.tres" id="11_fjvsc"]
+[ext_resource type="Resource" uid="uid://23tjtpq23m0r" path="res://obstacles/lasers_trap/resources/laser_trap_up.tres" id="12_kd1pq"]
 
 [node name="Spawner" type="Node2D" node_paths=PackedStringArray("_timer")]
 script = ExtResource("1_omlbp")
+_item_delay = 15.0
 _obstacles = Array[ExtResource("2_l8ehh")]([ExtResource("3_opx8m"), ExtResource("4_c8vr8"), ExtResource("5_wb2om"), ExtResource("6_fkrqb"), ExtResource("7_4bpov"), ExtResource("8_ttwt4")])
-_items = Array[ExtResource("2_l8ehh")]([ExtResource("9_rkw4i")])
+_items = Array[ExtResource("2_l8ehh")]([ExtResource("9_rkw4i"), ExtResource("9_rkw4i"), ExtResource("10_b5fsg"), ExtResource("11_fjvsc"), ExtResource("12_kd1pq")])
 _timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
