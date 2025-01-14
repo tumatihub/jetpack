@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SpawnItem" load_steps=3 format=3 uid="uid://cb6nuuhyiknf2"]
+
+[ext_resource type="PackedScene" uid="uid://4etsb5ab5c1x" path="res://entities/items/flying_item.tscn" id="1_2xynb"]
+[ext_resource type="Script" path="res://entities/spawner/spawn_item.gd" id="1_g160c"]
+
+[resource]
+script = ExtResource("1_g160c")
+scene = ExtResource("1_2xynb")
+time_before_next = 1.0
+possible_positions = Array[Vector2]([Vector2(2000, 500)])

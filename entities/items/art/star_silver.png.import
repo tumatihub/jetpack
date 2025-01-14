@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbj2uf2wmu2s6"
-path="res://.godot/imported/shipGreen_manned.png-25ca29033296bc54a98a69da994aee67.ctex"
+uid="uid://bkxh78dd3yf2h"
+path="res://.godot/imported/star_silver.png-f8e5982cc1cca46a96295667e66413ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/shipGreen_manned.png"
-dest_files=["res://.godot/imported/shipGreen_manned.png-25ca29033296bc54a98a69da994aee67.ctex"]
+source_file="res://entities/items/art/star_silver.png"
+dest_files=["res://.godot/imported/star_silver.png-f8e5982cc1cca46a96295667e66413ac.ctex"]
 
 [params]
 

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://4etsb5ab5c1x"]
+
+[ext_resource type="Script" path="res://entities/items/flying_item.gd" id="1_dkuj4"]
+[ext_resource type="Texture2D" uid="uid://bkxh78dd3yf2h" path="res://entities/items/art/star_silver.png" id="2_6qbfe"]
+[ext_resource type="Texture2D" uid="uid://x2q4a7jgpr03" path="res://entities/items/art/powerupYellow_shield.png" id="2_jwkal"]
+[ext_resource type="Texture2D" uid="uid://yqwub7pm80gm" path="res://entities/items/art/star_gold.png" id="3_1cywr"]
+
+[sub_resource type="Curve" id="Curve_sewxe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.95644, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g1ge6"]
+curve = SubResource("Curve_sewxe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3upx0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 30.495, 1)
+angle_min = -402.6
+angle_max = 480.0
+direction = Vector3(-1, 0, 0)
+spread = 20.73
+initial_velocity_min = 623.66
+initial_velocity_max = 806.46
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+alpha_curve = SubResource("CurveTexture_g1ge6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_javyk"]
+size = Vector2(64, 64)
+
+[node name="FlyingItem" type="Node2D" groups=["Item"]]
+script = ExtResource("1_dkuj4")
+_speed = 400.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-24, 0)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_3upx0")
+texture = ExtResource("2_6qbfe")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(-24, 0)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_3upx0")
+texture = ExtResource("3_1cywr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jwkal")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3.2, 3.2)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_javyk")

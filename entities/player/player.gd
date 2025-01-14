@@ -4,6 +4,7 @@ extends Node2D
 @export var _gravity := 980
 @export var _thrust_force: float = 2000
 @export var _bounce_force: float = 500
+@export var _shield_sprite: Sprite2D
 
 var _velocity: float
 var _can_move: bool = true
@@ -11,6 +12,15 @@ var _is_dead: bool = false
 var _is_bouncing: bool = false
 var _bounce_time: float = 0.2
 var _bounce_cooldown: float = 0
+var _shield_active: bool = false
+
+func activate_shield() -> void:
+	_shield_sprite.visible = true
+	_shield_active = true
+
+func deactivate_shield() -> void:
+	_shield_sprite.visible = false
+	_shield_active = false
 
 func _ready() -> void:
 	GameManager.set_player(self)
@@ -60,7 +70,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if _is_dead:
 		return
 	if area.owner.is_in_group("Obstacle"):
+		if _shield_active:
+			deactivate_shield()
+			return
 		_die()
 	elif area.owner is Coin:
 		var coin: Coin = area.owner as Coin
 		GameManager.score(coin.get_score())
+	elif area.owner.is_in_group("Item"):
+		var item := area.owner as FlyingItem
+		item.activate()
