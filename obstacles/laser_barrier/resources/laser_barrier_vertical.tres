@@ -8,3 +8,4 @@ script = ExtResource("2_a8ilx")
 scene = ExtResource("1_wr5e7")
 time_before_next = 2.0
 possible_positions = Array[Vector2]([Vector2(2176, 256), Vector2(2176, 800), Vector2(2176, 528)])
+use_absolute_time = false
