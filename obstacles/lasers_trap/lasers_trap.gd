@@ -21,6 +21,7 @@ func _get_available_traps() -> ShootGroup:
 	return group
 
 func _start_shooting() -> void:
+	_shoot_groups.shuffle()
 	for g in _shoot_groups:
 		for idx in g.traps:
 			_laser_traps[idx].shoot()
