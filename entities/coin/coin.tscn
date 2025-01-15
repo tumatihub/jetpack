@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://1g4yt2hv1ew2"]
+[gd_scene load_steps=18 format=3 uid="uid://1g4yt2hv1ew2"]
 
 [ext_resource type="Script" path="res://entities/coin/coin.gd" id="1_f7d55"]
 [ext_resource type="Texture2D" uid="uid://c4re6a33iv57y" path="res://entities/coin/art/gold_1.png" id="1_imqta"]
 [ext_resource type="Texture2D" uid="uid://cftuenij3fimv" path="res://entities/coin/art/gold_2.png" id="2_m5qpb"]
 [ext_resource type="Texture2D" uid="uid://ckifad4bn0vlm" path="res://entities/coin/art/gold_3.png" id="3_0royp"]
+[ext_resource type="AudioStream" uid="uid://cpifey1jp4b56" path="res://entities/coin/sfx/350869__cabled_mess__coin_c_06.wav" id="3_mhu8x"]
 [ext_resource type="Texture2D" uid="uid://dft2aloch7clh" path="res://entities/coin/art/gold_4.png" id="4_fhgaj"]
+[ext_resource type="Texture2D" uid="uid://bfwypsgfg6gvu" path="res://entities/coin/art/star_07.png" id="6_prjo1"]
+[ext_resource type="AudioStream" uid="uid://d1t5nfhb6ilmd" path="res://entities/coin/sfx/336932__the-sacha-rush__coin5.wav" id="7_c637v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_26xut"]
 radius = 40.0
@@ -71,10 +74,39 @@ _data = {
 "rotate": SubResource("Animation_162o3")
 }
 
-[node name="Coin" type="Node2D" node_paths=PackedStringArray("_animation_player")]
+[sub_resource type="Curve" id="Curve_eiwxp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.68097, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eulos"]
+curve = SubResource("Curve_eiwxp")
+
+[sub_resource type="Curve" id="Curve_5efnr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.51263, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s5v0o"]
+curve = SubResource("Curve_5efnr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jq0uv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+direction = Vector3(-1, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_s5v0o")
+alpha_curve = SubResource("CurveTexture_eulos")
+
+[node name="Coin" type="Node2D" node_paths=PackedStringArray("_animation_player", "_sprite", "_particles", "_audio_stream")]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_f7d55")
 _animation_player = NodePath("AnimationPlayer")
+_sprite = NodePath("Sprite2D")
+_particles = NodePath("GPUParticles2D")
+_audio_stream = NodePath("AudioStreamPlayer")
+_sounds = Array[AudioStream]([ExtResource("7_c637v"), ExtResource("3_mhu8x")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_imqta")
@@ -93,6 +125,19 @@ libraries = {
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(4.8, 4.8)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(0.9, 0.75975, 0.135, 1)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_jq0uv")
+texture = ExtResource("6_prjo1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_c637v")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

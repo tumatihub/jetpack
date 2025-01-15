@@ -3,6 +3,10 @@ extends Node2D
 
 @export var _animation_player: AnimationPlayer
 @export var _score: int = 1
+@export var _sprite: Sprite2D
+@export var _particles: GPUParticles2D
+@export var _audio_stream: AudioStreamPlayer
+@export var _sounds: Array[AudioStream]
 
 var _speed: float = 600.0
 
@@ -29,7 +33,12 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	_destroy()
 
 func _destroy() -> void:
-	queue_free()
+	_sprite.visible = false
+	_particles.restart()
+	_audio_stream.stream = _sounds[0]
+	if randf() < 0.2:
+		_audio_stream.stream = _sounds[1]
+	_audio_stream.play()
 
 func _on_speed_raised(current_speed: float) -> void:
 	_speed = current_speed
