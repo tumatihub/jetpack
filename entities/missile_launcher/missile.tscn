@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4wxaxf5ttrw1"]
+[gd_scene load_steps=20 format=3 uid="uid://b4wxaxf5ttrw1"]
 
 [ext_resource type="Script" path="res://entities/missile_launcher/missile.gd" id="1_3vvvr"]
 [ext_resource type="Texture2D" uid="uid://jwpcn5ndanoq" path="res://entities/missile_launcher/art/towerDefense_tile252.png" id="2_grqpd"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://3fp1qdbfgtg5" path="res://entities/missile_launcher/art/right.png" id="4_6x210"]
 [ext_resource type="Texture2D" uid="uid://fcw58xv47e0w" path="res://entities/missile_launcher/art/towerDefense_tile298.png" id="4_8hpna"]
 [ext_resource type="Texture2D" uid="uid://ccne6y253oav6" path="res://entities/missile_launcher/art/warning.png" id="5_wfxt1"]
+[ext_resource type="AudioStream" uid="uid://c5d8rqm7j6m30" path="res://entities/missile_launcher/sfx/warning.wav" id="8_8kl77"]
+[ext_resource type="AudioStream" uid="uid://ddjtd7dx8bo8g" path="res://entities/missile_launcher/sfx/rocket.wav" id="8_bl5sn"]
 
 [sub_resource type="Curve" id="Curve_wschv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.40542, 0.0, 0, 0]
@@ -31,19 +33,162 @@ initial_velocity_min = 50.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.2
-scale_max = 0.6
+scale_max = 0.8
 color_ramp = SubResource("GradientTexture1D_3xjys")
 alpha_curve = SubResource("CurveTexture_mw8sd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cenjl"]
 size = Vector2(32, 12)
 
-[node name="Missile" type="Node2D" node_paths=PackedStringArray("_exclamation", "_warning") groups=["Obstacle"]]
-scale = Vector2(2, 2)
+[sub_resource type="Animation" id="Animation_7rhwp"]
+resource_name = "blink"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Exclamation:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.960784, 0.172549, 0.172549, 1), Color(0.96, 0.7632, 0.1728, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.76, 0.114507, 0.0684, 1), Color(0.76, 0.114507, 0.0684, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lg648"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Exclamation:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.960784, 0.172549, 0.172549, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.76, 0.114507, 0.0684, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Warning/WarningTexture:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Warning/WarningTexture:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1738, 490)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Warning/WarningTexture:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.96, 0.7632, 0.1728, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_myos7"]
+resource_name = "warning"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Warning/WarningTexture:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Warning/WarningTexture:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(28, 0), Vector2(33, 0), Vector2(12, 0), Vector2(27, -9), Vector2(20, 4), Vector2(27, -9), Vector2(33, 0), Vector2(28, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Warning/WarningTexture:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.96, 0.7632, 0.1728, 1), Color(0.960784, 0.172549, 0.172549, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6p7o"]
+_data = {
+"RESET": SubResource("Animation_lg648"),
+"blink": SubResource("Animation_7rhwp"),
+"warning": SubResource("Animation_myos7")
+}
+
+[node name="Missile" type="Node2D" node_paths=PackedStringArray("_exclamation", "_warning", "_animation_player", "_audio_player", "_warning_audio_player") groups=["Obstacle"]]
+scale = Vector2(2.5, 2.5)
 script = ExtResource("1_3vvvr")
 _speed = 2500.0
 _exclamation = NodePath("AlertDisplay/Exclamation")
 _warning = NodePath("AlertDisplay/Warning")
+_animation_player = NodePath("AlertDisplay/AnimationPlayer")
+_audio_player = NodePath("AudioStreamPlayer")
+_warning_audio_player = NodePath("AlertDisplay/Warning/AudioStreamPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 100
@@ -56,7 +201,7 @@ rotation = 1.5708
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_uqkuh")
 texture = ExtResource("3_wsh2o")
-lifetime = 0.1
+lifetime = 0.3
 
 [node name="Fire" type="Sprite2D" parent="Sprite2D"]
 z_index = -1
@@ -77,7 +222,6 @@ shape = SubResource("RectangleShape2D_cenjl")
 [node name="AlertDisplay" type="CanvasLayer" parent="."]
 
 [node name="Exclamation" type="HBoxContainer" parent="AlertDisplay"]
-modulate = Color(0.755212, 0.109007, 0.0654819, 1)
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -88,8 +232,10 @@ offset_top = -50.0
 offset_bottom = 50.0
 grow_horizontal = 0
 grow_vertical = 2
+pivot_offset = Vector2(0, 50)
 
 [node name="Exclamation" type="TextureRect" parent="AlertDisplay/Exclamation"]
+self_modulate = Color(0.960784, 0.172549, 0.172549, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -97,26 +243,56 @@ texture = ExtResource("3_tr0o2")
 stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="AlertDisplay/Exclamation"]
+self_modulate = Color(0.76, 0.114507, 0.0684, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_6x210")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Warning" type="TextureRect" parent="AlertDisplay"]
+[node name="Warning" type="Control" parent="AlertDisplay"]
 visible = false
-modulate = Color(0.756863, 0.109804, 0.0666667, 1)
+layout_mode = 3
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -182.0
+offset_left = -208.0
 offset_top = -50.0
-offset_right = -82.0
-offset_bottom = 50.0
+offset_right = -168.0
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 2
+pivot_offset = Vector2(0, 100)
+
+[node name="WarningTexture" type="TextureRect" parent="AlertDisplay/Warning"]
+self_modulate = Color(0.96, 0.7632, 0.1728, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1738.0
+offset_top = 490.0
+offset_right = 1798.0
+offset_bottom = 550.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(50, 50)
 texture = ExtResource("5_wfxt1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AlertDisplay/Warning"]
+stream = ExtResource("8_8kl77")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AlertDisplay"]
+root_node = NodePath("../Exclamation")
+libraries = {
+"": SubResource("AnimationLibrary_o6p7o")
+}
+autoplay = "blink"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bl5sn")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
