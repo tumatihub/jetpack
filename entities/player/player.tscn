@@ -1,20 +1,116 @@
-[gd_scene load_steps=5 format=3 uid="uid://yiojagcmj4p1"]
+[gd_scene load_steps=17 format=3 uid="uid://yiojagcmj4p1"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_kx7yn"]
 [ext_resource type="Texture2D" uid="uid://bbj2uf2wmu2s6" path="res://entities/player/art/shipGreen_manned.png" id="2_d884w"]
+[ext_resource type="Texture2D" uid="uid://cv4duwfmt8ipo" path="res://entities/player/art/dome.png" id="3_3tjkc"]
+[ext_resource type="Texture2D" uid="uid://bpgmlmljibgli" path="res://entities/player/art/towerDefense_tile295.png" id="3_36kmc"]
 [ext_resource type="Texture2D" uid="uid://dt2q5n1662v7n" path="res://entities/player/art/shield3.png" id="3_i3um0"]
+[ext_resource type="Texture2D" uid="uid://cardkxnwwvlrw" path="res://entities/missile_launcher/art/smokeGrey5.png" id="5_xdgwe"]
+[ext_resource type="AudioStream" uid="uid://dl1m7wqx7xxm" path="res://entities/player/sfx/thrust.wav" id="7_uccy0"]
+
+[sub_resource type="Animation" id="Animation_wembm"]
+resource_name = "fire"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Fire:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.515, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l5of8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Fire:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kv606"]
+_data = {
+"RESET": SubResource("Animation_l5of8"),
+"fire": SubResource("Animation_wembm")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olaif"]
 radius = 46.0
 height = 108.0
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("_shield_sprite")]
+[sub_resource type="Curve" id="Curve_hublq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.29649, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rutvq"]
+curve = SubResource("Curve_hublq")
+
+[sub_resource type="Gradient" id="Gradient_2blfv"]
+offsets = PackedFloat32Array(0.713115, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.439049, 0.439049, 0.439049, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gndo5"]
+gradient = SubResource("Gradient_2blfv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dtkxb"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(-1, 1, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_gndo5")
+alpha_curve = SubResource("CurveTexture_rutvq")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_shield_sprite", "_fire", "_smoke_particles", "_dome", "_audio_player")]
 z_index = 100
 script = ExtResource("1_kx7yn")
 _shield_sprite = NodePath("Shield")
+_fire = NodePath("Fire")
+_smoke_particles = NodePath("Smoke")
+_dome = NodePath("Dome")
+_audio_player = NodePath("AudioStreamPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_d884w")
+
+[node name="Dome" type="Sprite2D" parent="."]
+position = Vector2(-35, 8.1)
+texture = ExtResource("3_3tjkc")
+offset = Vector2(35, -35)
+
+[node name="Fire" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(0, 87)
+rotation = -3.14159
+texture = ExtResource("3_36kmc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fire"]
+root_node = NodePath("../../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_kv606")
+}
+autoplay = "fire"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
@@ -28,10 +124,23 @@ shape = SubResource("CapsuleShape2D_olaif")
 [node name="Shield" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(0.816643, 0.668344, 0, 1)
+z_index = 1
 position = Vector2(14, -4.9738e-14)
 rotation = 1.5708
 scale = Vector2(1.385, 1.385)
 texture = ExtResource("3_i3um0")
+
+[node name="Smoke" type="GPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(0, 63)
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_dtkxb")
+texture = ExtResource("5_xdgwe")
+lifetime = 0.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_uccy0")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

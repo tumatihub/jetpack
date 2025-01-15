@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cy64667b5qhnj"]
+[gd_scene load_steps=18 format=4 uid="uid://cy64667b5qhnj"]
 
 [ext_resource type="Script" path="res://levels/background.gd" id="1_4r72n"]
 [ext_resource type="Texture2D" uid="uid://bsb8nntc0de0u" path="res://assets/bg_elements/Flat/clouds2.png" id="2_ljpyx"]
@@ -44,6 +44,9 @@ sources/1 = SubResource("TileSetAtlasSource_uclb8")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6fcq"]
 size = Vector2(1920, 74)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oqtdx"]
+polygon = PackedVector2Array(0, 976, 1912, 976, 1912, 1040, 0, 1040)
 
 [node name="BG" type="Node2D" node_paths=PackedStringArray("_parallax_bg")]
 script = ExtResource("1_4r72n")
@@ -137,3 +140,6 @@ shape = SubResource("RectangleShape2D_p6fcq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(960, 1008)
 shape = SubResource("RectangleShape2D_p6fcq")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D2"]
+occluder = SubResource("OccluderPolygon2D_oqtdx")

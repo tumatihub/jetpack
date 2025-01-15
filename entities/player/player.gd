@@ -1,10 +1,17 @@
 class_name Player
 extends Node2D
 
+const MIN_VELOCITY_TO_ROTATE_DOME = 300
+const MAX_DOME_ROTATION_DEG = -13
+
 @export var _gravity := 980
 @export var _thrust_force: float = 2000
 @export var _bounce_force: float = 500
 @export var _shield_sprite: Sprite2D
+@export var _fire: Sprite2D
+@export var _smoke_particles: GPUParticles2D
+@export var _dome: Sprite2D
+@export var _audio_player: AudioStreamPlayer
 
 var _velocity: float
 var _can_move: bool = true
@@ -40,10 +47,23 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not _is_dead and not _is_bouncing and Input.is_action_pressed("thrust"):
 		_velocity -= _thrust_force * delta
+		_fire.visible = true
+		_smoke_particles.emitting = true
+		if not _audio_player.playing:
+			_audio_player.play()
+	else:
+		_fire.visible = false
+		_smoke_particles.emitting = false
+		_audio_player.stop()
 	
 	_velocity += _gravity * delta
 	
 	global_position.y += _velocity * delta
+	
+	if _velocity > MIN_VELOCITY_TO_ROTATE_DOME:
+		_dome.rotation_degrees = move_toward(_dome.rotation_degrees, MAX_DOME_ROTATION_DEG, delta * 100)
+	else:
+		_dome.rotation_degrees = move_toward(_dome.rotation_degrees, 0, delta * 100)
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
