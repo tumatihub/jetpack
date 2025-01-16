@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://no6gj2dgu5sl"]
+[gd_scene load_steps=6 format=3 uid="uid://no6gj2dgu5sl"]
 
 [ext_resource type="PackedScene" uid="uid://yiojagcmj4p1" path="res://entities/player/player.tscn" id="1_dbpqp"]
 [ext_resource type="PackedScene" uid="uid://cy64667b5qhnj" path="res://levels/bg.tscn" id="1_htlry"]
 [ext_resource type="PackedScene" uid="uid://cu3hpkrh12li1" path="res://ui/hud.tscn" id="4_jxd4j"]
 [ext_resource type="PackedScene" uid="uid://dbyo4de62tgva" path="res://entities/spawner/spawner.tscn" id="4_kgs0o"]
+[ext_resource type="PackedScene" uid="uid://4etsb5ab5c1x" path="res://entities/items/flying_item.tscn" id="5_kn3js"]
 
 [node name="Sandbox" type="Node2D"]
 
@@ -17,3 +18,6 @@ _thrust_force = 4000.0
 [node name="Spawner" parent="." instance=ExtResource("4_kgs0o")]
 
 [node name="HUD" parent="." instance=ExtResource("4_jxd4j")]
+
+[node name="FlyingItem" parent="." instance=ExtResource("5_kn3js")]
+position = Vector2(1575, 474)

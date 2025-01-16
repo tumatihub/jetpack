@@ -29,9 +29,11 @@ alpha_curve = SubResource("CurveTexture_g1ge6")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_javyk"]
 size = Vector2(64, 64)
 
-[node name="FlyingItem" type="Node2D" groups=["Item"]]
+[node name="FlyingItem" type="Node2D" node_paths=PackedStringArray("_sprite", "_particles") groups=["Item"]]
 script = ExtResource("1_dkuj4")
 _speed = 400.0
+_sprite = NodePath("Sprite2D")
+_particles = [NodePath("GPUParticles2D"), NodePath("GPUParticles2D2")]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(-24, 0)

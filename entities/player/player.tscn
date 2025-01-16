@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://yiojagcmj4p1"]
+[gd_scene load_steps=25 format=3 uid="uid://yiojagcmj4p1"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_kx7yn"]
 [ext_resource type="PackedScene" uid="uid://damcjubyi1b17" path="res://common/fx/flash/flash.tscn" id="2_0rujn"]
 [ext_resource type="Texture2D" uid="uid://bbj2uf2wmu2s6" path="res://entities/player/art/shipGreen_manned.png" id="2_d884w"]
 [ext_resource type="Texture2D" uid="uid://cv4duwfmt8ipo" path="res://entities/player/art/dome.png" id="3_3tjkc"]
 [ext_resource type="Texture2D" uid="uid://bpgmlmljibgli" path="res://entities/player/art/towerDefense_tile295.png" id="3_36kmc"]
+[ext_resource type="AudioStream" uid="uid://caqx3trn5r8vm" path="res://common/fx/shock_wave/sfx/explosion.wav" id="3_cumie"]
 [ext_resource type="Texture2D" uid="uid://dt2q5n1662v7n" path="res://entities/player/art/shield3.png" id="3_i3um0"]
+[ext_resource type="AudioStream" uid="uid://c5kxyc171v8df" path="res://common/fx/shock_wave/sfx/scifi_impact.wav" id="4_dxvx5"]
 [ext_resource type="Texture2D" uid="uid://cardkxnwwvlrw" path="res://entities/missile_launcher/art/smokeGrey5.png" id="5_xdgwe"]
 [ext_resource type="AudioStream" uid="uid://dl1m7wqx7xxm" path="res://entities/player/sfx/thrust.wav" id="7_uccy0"]
 
@@ -82,15 +84,49 @@ collision_friction = 0.0
 collision_bounce = 0.0
 collision_use_scale = true
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("_shield_sprite", "_fire", "_smoke_particles", "_dome", "_audio_player")]
+[sub_resource type="Curve" id="Curve_hvrir"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.29649, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ujmup"]
+curve = SubResource("Curve_hvrir")
+
+[sub_resource type="Gradient" id="Gradient_tf1xl"]
+offsets = PackedFloat32Array(0, 0.642105)
+colors = PackedColorArray(1, 1, 1, 1, 0.23, 0.23, 0.23, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h7ukc"]
+gradient = SubResource("Gradient_tf1xl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6ux31"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(-1, -1, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_h7ukc")
+alpha_curve = SubResource("CurveTexture_ujmup")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_shield_sprite", "_fire", "_smoke_particles", "_fail_smoke_particles", "_dome", "_audio_player")]
 z_index = 100
 script = ExtResource("1_kx7yn")
 _shield_sprite = NodePath("Shield")
 _fire = NodePath("Fire")
-_smoke_particles = NodePath("Smoke")
+_smoke_particles = NodePath("EngineSmoke")
+_fail_smoke_particles = NodePath("FailSmoke")
 _dome = NodePath("Dome")
 _audio_player = NodePath("AudioStreamPlayer")
 _flash_scene = ExtResource("2_0rujn")
+_explosion_sfx = ExtResource("3_cumie")
+_item_sfx = ExtResource("4_dxvx5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_d884w")
@@ -132,12 +168,21 @@ rotation = 1.5708
 scale = Vector2(1.385, 1.385)
 texture = ExtResource("3_i3um0")
 
-[node name="Smoke" type="GPUParticles2D" parent="."]
+[node name="EngineSmoke" type="GPUParticles2D" parent="."]
 z_index = -2
 position = Vector2(0, 63)
 emitting = false
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_dtkxb")
+texture = ExtResource("5_xdgwe")
+lifetime = 0.5
+
+[node name="FailSmoke" type="GPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(-44, -21)
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_6ux31")
 texture = ExtResource("5_xdgwe")
 lifetime = 0.5
 

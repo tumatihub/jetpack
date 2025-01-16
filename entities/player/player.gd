@@ -10,9 +10,12 @@ const MAX_DOME_ROTATION_DEG = -13
 @export var _shield_sprite: Sprite2D
 @export var _fire: Sprite2D
 @export var _smoke_particles: GPUParticles2D
+@export var _fail_smoke_particles: GPUParticles2D
 @export var _dome: Sprite2D
 @export var _audio_player: AudioStreamPlayer
 @export var _flash_scene: PackedScene
+@export var _explosion_sfx: AudioStream
+@export var _item_sfx: AudioStream
 
 var _velocity: float
 var _can_move: bool = true
@@ -29,12 +32,12 @@ func take_damage() -> void:
 		_die()
 
 func activate_shield() -> void:
-	_flash(Color.YELLOW)
+	_flash(Color.YELLOW, [], _item_sfx)
 	_shield_sprite.visible = true
 	_shield_active = true
 
 func deactivate_shield() -> void:
-	_flash(Color.YELLOW)
+	_flash(Color.YELLOW, [global_position], _explosion_sfx)
 	_shield_sprite.visible = false
 	_shield_active = false
 
@@ -73,15 +76,18 @@ func _unhandled_input(_event: InputEvent) -> void:
 		get_tree().quit()
 
 func _die() -> void:
-	_flash(Color.RED)
+	_flash(Color.RED, [global_position], _explosion_sfx)
+	_fail_smoke_particles.restart()
 	_is_dead = true
 	_velocity = 0
 	get_tree().create_timer(3).timeout.connect(_on_death_timeout)
 
-func _flash(color: Color = Color.WHITE) -> void:
+func _flash(color: Color = Color.WHITE, positions: Array[Vector2] = [], audio: AudioStream = null) -> void:
 	var flash := _flash_scene.instantiate() as Flash
 	flash.color = color
-	flash.shock_wave_positions = [global_position]
+	flash.shock_wave_positions = positions
+	if audio:
+		flash.audio = audio
 	add_sibling(flash)
 
 func _bounce() -> void:
