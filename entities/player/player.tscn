@@ -1,12 +1,28 @@
-[gd_scene load_steps=17 format=3 uid="uid://yiojagcmj4p1"]
+[gd_scene load_steps=18 format=3 uid="uid://yiojagcmj4p1"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_kx7yn"]
+[ext_resource type="PackedScene" uid="uid://damcjubyi1b17" path="res://common/fx/flash/flash.tscn" id="2_0rujn"]
 [ext_resource type="Texture2D" uid="uid://bbj2uf2wmu2s6" path="res://entities/player/art/shipGreen_manned.png" id="2_d884w"]
 [ext_resource type="Texture2D" uid="uid://cv4duwfmt8ipo" path="res://entities/player/art/dome.png" id="3_3tjkc"]
 [ext_resource type="Texture2D" uid="uid://bpgmlmljibgli" path="res://entities/player/art/towerDefense_tile295.png" id="3_36kmc"]
 [ext_resource type="Texture2D" uid="uid://dt2q5n1662v7n" path="res://entities/player/art/shield3.png" id="3_i3um0"]
 [ext_resource type="Texture2D" uid="uid://cardkxnwwvlrw" path="res://entities/missile_launcher/art/smokeGrey5.png" id="5_xdgwe"]
 [ext_resource type="AudioStream" uid="uid://dl1m7wqx7xxm" path="res://entities/player/sfx/thrust.wav" id="7_uccy0"]
+
+[sub_resource type="Animation" id="Animation_l5of8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Fire:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_wembm"]
 resource_name = "fire"
@@ -23,21 +39,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.515, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_l5of8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Fire:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kv606"]
@@ -89,6 +90,7 @@ _fire = NodePath("Fire")
 _smoke_particles = NodePath("Smoke")
 _dome = NodePath("Dome")
 _audio_player = NodePath("AudioStreamPlayer")
+_flash_scene = ExtResource("2_0rujn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_d884w")

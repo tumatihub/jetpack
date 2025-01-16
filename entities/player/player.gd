@@ -12,6 +12,7 @@ const MAX_DOME_ROTATION_DEG = -13
 @export var _smoke_particles: GPUParticles2D
 @export var _dome: Sprite2D
 @export var _audio_player: AudioStreamPlayer
+@export var _flash_scene: PackedScene
 
 var _velocity: float
 var _can_move: bool = true
@@ -28,10 +29,12 @@ func take_damage() -> void:
 		_die()
 
 func activate_shield() -> void:
+	_flash(Color.YELLOW)
 	_shield_sprite.visible = true
 	_shield_active = true
 
 func deactivate_shield() -> void:
+	_flash(Color.YELLOW)
 	_shield_sprite.visible = false
 	_shield_active = false
 
@@ -70,9 +73,16 @@ func _unhandled_input(_event: InputEvent) -> void:
 		get_tree().quit()
 
 func _die() -> void:
+	_flash(Color.RED)
 	_is_dead = true
 	_velocity = 0
 	get_tree().create_timer(3).timeout.connect(_on_death_timeout)
+
+func _flash(color: Color = Color.WHITE) -> void:
+	var flash := _flash_scene.instantiate() as Flash
+	flash.color = color
+	flash.shock_wave_positions = [global_position]
+	add_sibling(flash)
 
 func _bounce() -> void:
 	_is_bouncing = true

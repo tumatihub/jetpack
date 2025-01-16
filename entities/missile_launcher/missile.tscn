@@ -40,35 +40,6 @@ alpha_curve = SubResource("CurveTexture_mw8sd")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cenjl"]
 size = Vector2(32, 12)
 
-[sub_resource type="Animation" id="Animation_7rhwp"]
-resource_name = "blink"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Exclamation:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.960784, 0.172549, 0.172549, 1), Color(0.96, 0.7632, 0.1728, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Color(0.76, 0.114507, 0.0684, 1), Color(0.76, 0.114507, 0.0684, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_lg648"]
 length = 0.001
 tracks/0/type = "value"
@@ -130,6 +101,35 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.96, 0.7632, 0.1728, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7rhwp"]
+resource_name = "blink"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Exclamation:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.960784, 0.172549, 0.172549, 1), Color(0.96, 0.7632, 0.1728, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.76, 0.114507, 0.0684, 1), Color(0.76, 0.114507, 0.0684, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_myos7"]
