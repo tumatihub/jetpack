@@ -56,5 +56,6 @@ func _flash() -> void:
 	var flash := _flash_scene.instantiate() as Flash
 	flash.color = Color.RED
 	flash.audio = _flash_sfx
+	flash.volume = -5
 	flash.finished.connect(func(): _is_flashing = false)
 	add_sibling(flash)

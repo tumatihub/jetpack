@@ -38,3 +38,4 @@ position = Vector2(0, 900)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_cfqj8")
+volume_db = -5.0

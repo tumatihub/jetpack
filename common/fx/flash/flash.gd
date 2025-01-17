@@ -10,10 +10,12 @@ signal finished
 var color: Color = Color.WHITE
 var shock_wave_positions: Array[Vector2]
 var audio: AudioStream
+var volume: float = 0
 
 func _ready() -> void:
 	if audio:
 		_audio_player.stream = audio
+		_audio_player.volume_db = volume
 		_audio_player.play()
 	_flash()
 	get_tree().create_timer(5).timeout.connect(queue_free)
