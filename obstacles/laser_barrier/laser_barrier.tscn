@@ -1,8 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgpu724mm3tc4"]
+[gd_scene load_steps=9 format=3 uid="uid://dgpu724mm3tc4"]
 
 [ext_resource type="Script" path="res://obstacles/laser_barrier/laser_barrier.gd" id="1_k5ts2"]
 [ext_resource type="Texture2D" uid="uid://d16iqxjsbff5v" path="res://obstacles/laser_barrier/art/laser_shooter.png" id="1_lxk36"]
 [ext_resource type="Texture2D" uid="uid://km0guf4lj1qd" path="res://obstacles/laser_barrier/art/laser.png" id="2_unrvl"]
+[ext_resource type="Shader" path="res://obstacles/lasers_trap/laser.gdshader" id="4_b17x3"]
+[ext_resource type="Texture2D" uid="uid://bxgngm1ch476j" path="res://obstacles/lasers_trap/resources/laser_noise.tres" id="5_dgf3t"]
+[ext_resource type="Texture2D" uid="uid://bgw8df4a56k4k" path="res://obstacles/laser_barrier/art/laserRedHorizontal.png" id="6_etfl6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_08bau"]
+shader = ExtResource("4_b17x3")
+shader_parameter/strength = 6.54
+shader_parameter/color = Color(0.82, 0.27675, 0.205, 1)
+shader_parameter/noise = ExtResource("5_dgf3t")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84j8n"]
 size = Vector2(288, 20)
@@ -11,20 +20,23 @@ size = Vector2(288, 20)
 script = ExtResource("1_k5ts2")
 
 [node name="LeftShooter" type="Sprite2D" parent="."]
-position = Vector2(-128, 0)
+position = Vector2(-130, 0)
 rotation = 1.5708
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("1_lxk36")
 
 [node name="RightShooter" type="Sprite2D" parent="."]
-position = Vector2(128, 0)
+position = Vector2(130, 0)
 rotation = -1.5708
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("1_lxk36")
 
 [node name="Beam2" type="Node2D" parent="."]
 modulate = Color(1, 0.687333, 0.33, 1)
-position = Vector2(-104, 0)
+z_index = -1
 
 [node name="Left" type="Sprite2D" parent="Beam2"]
+visible = false
 texture_repeat = 3
 rotation = -1.5708
 texture = ExtResource("2_unrvl")
@@ -33,13 +45,13 @@ region_rect = Rect2(0, 0, 20, 16)
 
 [node name="Center" type="Sprite2D" parent="Beam2"]
 texture_repeat = 3
-position = Vector2(56, 0)
-rotation = -1.5708
-texture = ExtResource("2_unrvl")
-region_enabled = true
+material = SubResource("ShaderMaterial_08bau")
+scale = Vector2(3.42857, 0.457143)
+texture = ExtResource("6_etfl6")
 region_rect = Rect2(0, 16, 20, 96)
 
 [node name="Center2" type="Sprite2D" parent="Beam2"]
+visible = false
 texture_repeat = 3
 position = Vector2(152, 0)
 rotation = -1.5708
@@ -48,6 +60,7 @@ region_enabled = true
 region_rect = Rect2(0, 16, 20, 96)
 
 [node name="Right" type="Sprite2D" parent="Beam2"]
+visible = false
 texture_repeat = 3
 position = Vector2(208, 0)
 rotation = -1.5708

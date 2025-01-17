@@ -1,22 +1,18 @@
-[gd_scene load_steps=22 format=3 uid="uid://btbjrufd0hjma"]
+[gd_scene load_steps=21 format=3 uid="uid://btbjrufd0hjma"]
 
 [ext_resource type="Texture2D" uid="uid://bqg07lahon10e" path="res://obstacles/lasers_trap/art/laserRedHorizontal.png" id="1_61s0f"]
 [ext_resource type="Script" path="res://obstacles/lasers_trap/laser_trap_line.gd" id="1_uuy25"]
 [ext_resource type="Shader" path="res://obstacles/lasers_trap/laser.gdshader" id="2_3k1b5"]
 [ext_resource type="Texture2D" uid="uid://mvvqj6xkdgwe" path="res://obstacles/lasers_trap/art/laserUp.png" id="2_6uhrk"]
 [ext_resource type="Texture2D" uid="uid://dm7lpet32kq62" path="res://obstacles/lasers_trap/art/circle_02.png" id="3_evc2i"]
+[ext_resource type="Texture2D" uid="uid://bxgngm1ch476j" path="res://obstacles/lasers_trap/resources/laser_noise.tres" id="3_jeey2"]
 [ext_resource type="Texture2D" uid="uid://dvx4vtfloop6n" path="res://obstacles/lasers_trap/art/circle_05.png" id="6_tiorp"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_b8hxc"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1n2du"]
-noise = SubResource("FastNoiseLite_b8hxc")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_at5ld"]
 shader = ExtResource("2_3k1b5")
 shader_parameter/strength = 4.0
-shader_parameter/color = Color(0.82, 0.205, 0.205, 1)
-shader_parameter/noise = SubResource("NoiseTexture2D_1n2du")
+shader_parameter/color = Color(0.82, 0.27675, 0.205, 1)
+shader_parameter/noise = ExtResource("3_jeey2")
 
 [sub_resource type="Curve" id="Curve_w4exd"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.81982, 0), -2.47847, 0.0, 0, 0]
