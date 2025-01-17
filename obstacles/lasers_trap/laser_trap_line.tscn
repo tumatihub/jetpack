@@ -237,7 +237,7 @@ tracks/3/path = NodePath("Area2D:monitorable")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.933333, 1, 1.36667, 1.5),
+"times": PackedFloat32Array(0, 0.933333, 1, 1.3, 1.43333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [false, false, true, true, false]
