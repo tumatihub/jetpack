@@ -1,9 +1,54 @@
-[gd_scene load_steps=12 format=3 uid="uid://btbjrufd0hjma"]
+[gd_scene load_steps=22 format=3 uid="uid://btbjrufd0hjma"]
 
 [ext_resource type="Texture2D" uid="uid://bqg07lahon10e" path="res://obstacles/lasers_trap/art/laserRedHorizontal.png" id="1_61s0f"]
 [ext_resource type="Script" path="res://obstacles/lasers_trap/laser_trap_line.gd" id="1_uuy25"]
+[ext_resource type="Shader" path="res://obstacles/lasers_trap/laser.gdshader" id="2_3k1b5"]
 [ext_resource type="Texture2D" uid="uid://mvvqj6xkdgwe" path="res://obstacles/lasers_trap/art/laserUp.png" id="2_6uhrk"]
 [ext_resource type="Texture2D" uid="uid://dm7lpet32kq62" path="res://obstacles/lasers_trap/art/circle_02.png" id="3_evc2i"]
+[ext_resource type="Texture2D" uid="uid://dvx4vtfloop6n" path="res://obstacles/lasers_trap/art/circle_05.png" id="6_tiorp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b8hxc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1n2du"]
+noise = SubResource("FastNoiseLite_b8hxc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_at5ld"]
+shader = ExtResource("2_3k1b5")
+shader_parameter/strength = 4.0
+shader_parameter/color = Color(0.82, 0.205, 0.205, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_1n2du")
+
+[sub_resource type="Curve" id="Curve_w4exd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.81982, 0), -2.47847, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b4na6"]
+curve = SubResource("Curve_w4exd")
+
+[sub_resource type="Curve" id="Curve_ikj54"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.326316), -1.83609, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mm37n"]
+curve = SubResource("Curve_ikj54")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uwlk6"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 33.655
+emission_ring_radius = 150.0
+emission_ring_inner_radius = 100.0
+orbit_velocity_min = 0.614
+orbit_velocity_max = 1.212
+radial_velocity_min = -377.95
+radial_velocity_max = -94.49
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_mm37n")
+color = Color(1, 0.6515, 0.49, 1)
+alpha_curve = SubResource("CurveTexture_b4na6")
 
 [sub_resource type="Animation" id="Animation_fcnov"]
 length = 0.001
@@ -91,6 +136,30 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LeftCannon/GPUParticles2D:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RightCannon/GPUParticles2D:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_38oem"]
 resource_name = "enter"
@@ -156,10 +225,10 @@ tracks/2/path = NodePath("Laser:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.933333, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.933333, 1, 1.16667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(24, 0.2), Vector2(24, 1.535)]
+"values": [Vector2(23.62, 0.2), Vector2(23.62, 0.835), Vector2(23.62, 0.835), Vector2(23.62, 0.2)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -199,6 +268,44 @@ tracks/5/keys = {
 "method": &"check_player_collision"
 }]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"flash"],
+"method": &"emit_signal"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LeftCannon/GPUParticles2D:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RightCannon/GPUParticles2D:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8hk6j"]
 _data = {
@@ -215,6 +322,7 @@ size = Vector2(1650, 20)
 size = Vector2(1650, 20)
 
 [node name="LaserTrapLine" type="Node2D" node_paths=PackedStringArray("_animation_player", "_shape_cast") groups=["Obstacle"]]
+z_index = 200
 position = Vector2(0, 160)
 script = ExtResource("1_uuy25")
 _animation_player = NodePath("AnimationPlayer")
@@ -224,6 +332,7 @@ _shape_cast = NodePath("ShapeCast2D")
 visible = false
 self_modulate = Color(1, 0.4, 0.4, 1)
 z_index = -10
+material = SubResource("ShaderMaterial_at5ld")
 position = Vector2(960, 0)
 scale = Vector2(24, 0.2)
 texture = ExtResource("1_61s0f")
@@ -239,6 +348,16 @@ z_index = -1
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_evc2i")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="LeftCannon"]
+z_index = -1
+rotation = -1.5708
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_uwlk6")
+texture = ExtResource("6_tiorp")
+one_shot = true
+explosiveness = 1.0
+
 [node name="RightCannon" type="Sprite2D" parent="."]
 position = Vector2(1970, 0)
 rotation = -1.5708
@@ -251,12 +370,23 @@ rotation = -3.14159
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_evc2i")
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="RightCannon"]
+z_index = -1
+rotation = -1.5708
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_uwlk6")
+texture = ExtResource("6_tiorp")
+one_shot = true
+explosiveness = 1.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_8hk6j")
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -264,6 +394,7 @@ position = Vector2(961, 0)
 shape = SubResource("RectangleShape2D_wnujd")
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+visible = false
 position = Vector2(961, 0)
 shape = SubResource("RectangleShape2D_x8t33")
 exclude_parent = false

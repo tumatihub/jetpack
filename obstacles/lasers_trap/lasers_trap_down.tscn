@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq3no5xgx0dmd"]
+[gd_scene load_steps=8 format=3 uid="uid://dq3no5xgx0dmd"]
 
 [ext_resource type="Script" path="res://obstacles/lasers_trap/lasers_trap.gd" id="1_mwr75"]
 [ext_resource type="Script" path="res://obstacles/lasers_trap/shoot_group.gd" id="2_je105"]
+[ext_resource type="PackedScene" uid="uid://damcjubyi1b17" path="res://common/fx/flash/flash.tscn" id="3_8l05x"]
 [ext_resource type="PackedScene" uid="uid://btbjrufd0hjma" path="res://obstacles/lasers_trap/laser_trap_line.tscn" id="3_sy6q3"]
+[ext_resource type="AudioStream" uid="uid://dwyfag4hghtbj" path="res://obstacles/lasers_trap/sfx/laser-blast.wav" id="4_pbw6q"]
+[ext_resource type="AudioStream" uid="uid://ck3vfw7or8wgs" path="res://obstacles/lasers_trap/sfx/laser_charge.wav" id="6_cfqj8"]
 
 [sub_resource type="Resource" id="Resource_836tj"]
 script = ExtResource("2_je105")
 traps = Array[int]([2, 3, 4, 5])
 
-[node name="LasersTrap" type="Node2D"]
+[node name="LasersTrap" type="Node2D" node_paths=PackedStringArray("_charge_player")]
 script = ExtResource("1_mwr75")
 _shoot_groups = Array[ExtResource("2_je105")]([SubResource("Resource_836tj")])
+_flash_scene = ExtResource("3_8l05x")
+_flash_sfx = ExtResource("4_pbw6q")
+_charge_player = NodePath("AudioStreamPlayer")
 
 [node name="LaserTrapLine" parent="." instance=ExtResource("3_sy6q3")]
 position = Vector2(0, 150)
@@ -29,3 +35,6 @@ position = Vector2(0, 750)
 
 [node name="LaserTrapLine6" parent="." instance=ExtResource("3_sy6q3")]
 position = Vector2(0, 900)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_cfqj8")

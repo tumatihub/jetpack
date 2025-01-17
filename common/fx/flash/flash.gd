@@ -1,6 +1,8 @@
 class_name Flash
 extends Node2D
 
+signal finished
+
 @export var _flash_texture: TextureRect
 @export var _shock_wave_scene: PackedScene
 @export var _audio_player: AudioStreamPlayer
@@ -21,6 +23,7 @@ func _flash() -> void:
 	var tween := create_tween()
 	tween.tween_property(_flash_texture, "self_modulate:a", 0, 0.1)
 	tween.tween_callback(_spawn_all_shock_waves)
+	tween.tween_callback(finished.emit)
 
 func _spawn_all_shock_waves() -> void:
 	if shock_wave_positions.size() == 0:

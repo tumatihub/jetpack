@@ -1,6 +1,8 @@
 class_name LaserTrapLine
 extends Node2D
 
+signal flash
+
 const ENTER_ANIMATION = &"enter"
 const SHOOT_ANIMATION = &"shoot"
 
