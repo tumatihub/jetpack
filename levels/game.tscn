@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqw78eklcwjhc"]
+
+[ext_resource type="PackedScene" uid="uid://cy64667b5qhnj" path="res://levels/bg.tscn" id="1_xkp2r"]
+[ext_resource type="PackedScene" uid="uid://yiojagcmj4p1" path="res://entities/player/player.tscn" id="2_xf42w"]
+[ext_resource type="PackedScene" uid="uid://dbyo4de62tgva" path="res://entities/spawner/spawner.tscn" id="3_x3nu5"]
+[ext_resource type="PackedScene" uid="uid://cu3hpkrh12li1" path="res://ui/hud.tscn" id="4_aomm4"]
+
+[node name="Game" type="Node2D"]
+
+[node name="BG" parent="." instance=ExtResource("1_xkp2r")]
+
+[node name="Player" parent="." instance=ExtResource("2_xf42w")]
+
+[node name="Spawner" parent="." instance=ExtResource("3_x3nu5")]
+
+[node name="HUD" parent="." instance=ExtResource("4_aomm4")]

@@ -1,21 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu3hpkrh12li1"]
+[gd_scene load_steps=5 format=3 uid="uid://cu3hpkrh12li1"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_rao2x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_g0mf4"]
 font_size = 42
-font_color = Color(0, 0, 0, 1)
+font_color = Color(0.884252, 0.559993, 1.15514e-06, 1)
 outline_size = 8
+outline_color = Color(0.190762, 0.190762, 0.190762, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cfixm"]
 font_size = 24
-font_color = Color(0, 0, 0, 1)
 outline_size = 8
+outline_color = Color(0.190762, 0.190762, 0.190762, 1)
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("_score_label", "_record_label")]
+[sub_resource type="LabelSettings" id="LabelSettings_ed7wa"]
+font_size = 36
+
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("_score_label", "_record_label", "_start_info_label")]
 script = ExtResource("1_rao2x")
 _score_label = NodePath("MarginContainer/VBoxContainer/Score")
 _record_label = NodePath("MarginContainer/VBoxContainer/Record")
+_start_info_label = NodePath("MarginContainer/StartInfo")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -48,3 +53,10 @@ size_flags_vertical = 0
 text = "Record: 9999"
 label_settings = SubResource("LabelSettings_cfixm")
 uppercase = true
+
+[node name="StartInfo" type="Label" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Press UP or SPACE to start"
+label_settings = SubResource("LabelSettings_ed7wa")

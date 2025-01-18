@@ -85,14 +85,14 @@ collision_bounce = 0.0
 collision_use_scale = true
 
 [sub_resource type="Curve" id="Curve_hvrir"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.29649, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.518018, 0), -2.29649, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ujmup"]
 curve = SubResource("Curve_hvrir")
 
 [sub_resource type="Gradient" id="Gradient_tf1xl"]
-offsets = PackedFloat32Array(0, 0.642105)
+offsets = PackedFloat32Array(0, 0.252632)
 colors = PackedColorArray(1, 1, 1, 1, 0.23, 0.23, 0.23, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_h7ukc"]
@@ -110,14 +110,13 @@ scale_min = 0.3
 scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_h7ukc")
 alpha_curve = SubResource("CurveTexture_ujmup")
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 0.0
-collision_use_scale = true
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("_shield_sprite", "_fire", "_smoke_particles", "_fail_smoke_particles", "_dome", "_audio_player")]
 z_index = 100
+position = Vector2(400, 280)
 script = ExtResource("1_kx7yn")
+_gravity = 1800
+_thrust_force = 4000.0
 _shield_sprite = NodePath("Shield")
 _fire = NodePath("Fire")
 _smoke_particles = NodePath("EngineSmoke")
@@ -181,10 +180,11 @@ lifetime = 0.5
 z_index = -2
 position = Vector2(-44, -21)
 emitting = false
-amount = 15
+amount = 30
 process_material = SubResource("ParticleProcessMaterial_6ux31")
 texture = ExtResource("5_xdgwe")
 lifetime = 0.5
+one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_uccy0")

@@ -1,6 +1,10 @@
 class_name Player
 extends Node2D
 
+signal died
+signal finished_entering
+signal start_input
+
 const MIN_VELOCITY_TO_ROTATE_DOME = 300
 const MAX_DOME_ROTATION_DEG = -13
 
@@ -16,6 +20,8 @@ const MAX_DOME_ROTATION_DEG = -13
 @export var _flash_scene: PackedScene
 @export var _explosion_sfx: AudioStream
 @export var _item_sfx: AudioStream
+@export var _start_position: Vector2 = Vector2(400, 280)
+@export var _hide_position: Vector2 = Vector2(-400, 280)
 
 var _velocity: float
 var _can_move: bool = true
@@ -24,6 +30,21 @@ var _is_bouncing: bool = false
 var _bounce_time: float = 0.2
 var _bounce_cooldown: float = 0
 var _shield_active: bool = false
+var _waiting_input: bool = false
+var _entering: bool = false
+
+func enter_map() -> void:
+	_entering = true
+	global_position = _hide_position
+	_velocity = 0
+	_smoke_particles.emitting = true
+	_fire.visible = true
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", _start_position, 2)
+	tween.tween_callback(func(): 
+		_waiting_input = true
+		finished_entering.emit()
+	)
 
 func take_damage() -> void:
 	if _shield_active:
@@ -43,6 +64,7 @@ func deactivate_shield() -> void:
 
 func _ready() -> void:
 	GameManager.set_player(self)
+	GameManager.start()
 
 func _process(delta: float) -> void:
 	if _bounce_cooldown > 0:
@@ -51,6 +73,8 @@ func _process(delta: float) -> void:
 		_is_bouncing = false
 
 func _physics_process(delta: float) -> void:
+	if _entering:
+		return
 	if not _is_dead and not _is_bouncing and Input.is_action_pressed("thrust"):
 		_velocity -= _thrust_force * delta
 		_fire.visible = true
@@ -74,13 +98,22 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+	if Input.is_action_just_pressed("thrust"):
+		if _waiting_input:
+			_entering = false
+			_smoke_particles.emitting = false
+			_fire.visible = false
+			_is_dead = false
+			_waiting_input = false
+			_fail_smoke_particles.visible = true
+			start_input.emit()
 
 func _die() -> void:
 	_flash(Color.RED, [global_position], _explosion_sfx)
 	_fail_smoke_particles.restart()
 	_is_dead = true
 	_velocity = 0
-	get_tree().create_timer(3).timeout.connect(_on_death_timeout)
+	died.emit()
 
 func _flash(color: Color = Color.WHITE, positions: Array[Vector2] = [], audio: AudioStream = null) -> void:
 	var flash := _flash_scene.instantiate() as Flash
@@ -99,9 +132,6 @@ func _bounce() -> void:
 		_velocity -= _bounce_force
 	else:
 		_velocity += _bounce_force * 0.3
-
-func _on_death_timeout() -> void:
-	GameManager.reset()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if _is_dead:

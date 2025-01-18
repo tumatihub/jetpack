@@ -3,6 +3,9 @@ extends Node2D
 signal speed_raised(speed: float)
 signal scored(current_score: int)
 signal record_updated(record: int)
+signal player_died
+signal game_started
+signal player_finished_entering
 
 @export var _max_speed: float = 1200.0
 @export var _speed_rate: float = 50.0
@@ -17,9 +20,21 @@ var _player: Player
 
 func set_player(player: Player) -> void:
 	_player = player
+	_player.died.connect(_on_player_died)
+	_player.finished_entering.connect(_on_player_finished_entering)
+	_player.start_input.connect(_on_player_start_input)
 
 func get_player() -> Player:
 	return _player
+
+func start() -> void:
+	_player.enter_map()
+
+func _on_player_finished_entering() -> void:
+	player_finished_entering.emit()
+
+func _on_player_start_input() -> void:
+	game_started.emit()
 
 func _ready() -> void:
 	var record := _load_record()
@@ -45,7 +60,7 @@ func reset() -> void:
 		record_updated.emit(_current_record)
 	_current_speed = _start_speed
 	_current_score = 0
-	get_tree().reload_current_scene()
+	start()
 
 func _save_record() -> void:
 	var file = FileAccess.open("user://" + _save_file, FileAccess.WRITE)
@@ -78,3 +93,10 @@ func _speed_up() -> void:
 
 func _on_timer_timeout() -> void:
 	_speed_up()
+
+func _on_player_died() -> void:
+	player_died.emit()
+	get_tree().create_timer(5).timeout.connect(_on_death_timeout)
+
+func _on_death_timeout() -> void:
+	reset()

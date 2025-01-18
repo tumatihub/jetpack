@@ -33,13 +33,20 @@ func spawn() -> void:
 		time = item.time_before_next * GameManager.get_start_speed()/GameManager.get_speed()
 	_timer.start(time)
 
+func _stop() -> void:
+	_timer.stop()
+
+func _start() -> void:
+	_restart_cooldown()
+	spawn()
+
 func _restart_cooldown() -> void:
 	_item_cooldown = randf_range(_item_delay - _item_delay_variation, _item_delay + _item_delay_variation)
 
 func _ready() -> void:
+	GameManager.player_died.connect(_stop)
+	GameManager.game_started.connect(_start)
 	_timer.timeout.connect(_on_timer_timeout)
-	_restart_cooldown()
-	spawn()
 
 func _process(delta: float) -> void:
 	if _item_cooldown > 0:
