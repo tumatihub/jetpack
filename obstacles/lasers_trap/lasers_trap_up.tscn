@@ -39,3 +39,4 @@ position = Vector2(0, 900)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_wtl10")
 volume_db = -5.0
+bus = &"SFX"

@@ -31,3 +31,4 @@ texture = SubResource("GradientTexture2D_74tos")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
+bus = &"SFX"
