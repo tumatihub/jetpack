@@ -96,8 +96,6 @@ func _physics_process(delta: float) -> void:
 		_dome.rotation_degrees = move_toward(_dome.rotation_degrees, 0, delta * 100)
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
 	if Input.is_action_just_pressed("thrust"):
 		if _waiting_input:
 			_entering = false

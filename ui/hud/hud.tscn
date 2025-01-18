@@ -15,6 +15,9 @@ outline_color = Color(0.190762, 0.190762, 0.190762, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ed7wa"]
 font_size = 36
+shadow_size = 2
+shadow_color = Color(0.176419, 0.176419, 0.176419, 1)
+shadow_offset = Vector2(2, 2)
 
 [node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("_score_label", "_record_label", "_start_info_label")]
 script = ExtResource("1_rao2x")
