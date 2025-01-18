@@ -25,7 +25,7 @@ const MAX_DOME_ROTATION_DEG = -13
 
 var _velocity: float
 var _can_move: bool = true
-var _is_dead: bool = false
+var _is_dead: bool = true
 var _is_bouncing: bool = false
 var _bounce_time: float = 0.2
 var _bounce_cooldown: float = 0
@@ -63,8 +63,8 @@ func deactivate_shield() -> void:
 	_shield_active = false
 
 func _ready() -> void:
+	global_position = _hide_position
 	GameManager.set_player(self)
-	GameManager.start()
 
 func _process(delta: float) -> void:
 	if _bounce_cooldown > 0:
