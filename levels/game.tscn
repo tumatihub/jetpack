@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqw78eklcwjhc"]
+[gd_scene load_steps=8 format=3 uid="uid://bqw78eklcwjhc"]
 
 [ext_resource type="PackedScene" uid="uid://cy64667b5qhnj" path="res://levels/bg.tscn" id="1_xkp2r"]
 [ext_resource type="PackedScene" uid="uid://yiojagcmj4p1" path="res://entities/player/player.tscn" id="2_xf42w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cu3hpkrh12li1" path="res://ui/hud/hud.tscn" id="4_aomm4"]
 [ext_resource type="PackedScene" uid="uid://dks3jhqap1t7s" path="res://ui/menu/menu.tscn" id="5_qovdl"]
 [ext_resource type="PackedScene" uid="uid://y6f8emc37xj" path="res://ui/pause/pause_menu.tscn" id="6_7od5q"]
+[ext_resource type="PackedScene" uid="uid://cjdqrs24or0ha" path="res://utils/transition/transition.tscn" id="7_8qmmq"]
 
 [node name="Game" type="Node2D"]
 
@@ -20,3 +21,6 @@
 [node name="Menu" parent="." instance=ExtResource("5_qovdl")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_7od5q")]
+
+[node name="Transition" parent="." instance=ExtResource("7_8qmmq")]
+_transit_out_at_start = true

@@ -54,7 +54,7 @@ shader_parameter/strength = 4.0
 shader_parameter/color = Color(0.82, 0.27675, 0.205, 1)
 shader_parameter/noise = ExtResource("14_5c12e")
 
-[node name="LoadingScreen" type="Control"]
+[node name="LoadingScreen" type="Control" node_paths=PackedStringArray("_logo")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d080o")
 _next_scene = ExtResource("2_ubju0")
+_logo = NodePath("CanvasLayer/BG/Logo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
