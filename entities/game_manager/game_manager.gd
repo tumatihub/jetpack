@@ -7,9 +7,12 @@ signal player_died
 signal game_started
 signal player_finished_entering
 
+const DEATH_TIME = 5
+
 @export var _max_speed: float = 1200.0
 @export var _speed_rate: float = 50.0
 @export var _start_speed: float = 600.0
+@export var _speed_timer: Timer
 
 var _current_score: int
 var _save_file: String = "save.sav"
@@ -34,6 +37,7 @@ func _on_player_finished_entering() -> void:
 	player_finished_entering.emit()
 
 func _on_player_start_input() -> void:
+	_speed_timer.start()
 	game_started.emit()
 
 func _ready() -> void:
@@ -91,12 +95,21 @@ func _speed_up() -> void:
 	_current_speed = minf(_max_speed, _current_speed + _speed_rate)
 	speed_raised.emit(_current_speed)
 
+func _back_to_min_speed() -> void:
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_method(func(speed: float):
+		_current_speed = speed
+		speed_raised.emit(_current_speed)
+	, _current_speed, _start_speed, DEATH_TIME)
+
 func _on_timer_timeout() -> void:
 	_speed_up()
 
 func _on_player_died() -> void:
+	_speed_timer.stop()
+	_back_to_min_speed()
 	player_died.emit()
-	get_tree().create_timer(5).timeout.connect(_on_death_timeout)
+	get_tree().create_timer(DEATH_TIME).timeout.connect(_on_death_timeout)
 
 func _on_death_timeout() -> void:
 	reset()

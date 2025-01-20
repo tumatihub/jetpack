@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://entities/game_manager/game_manager.gd" id="1_oqrf8"]
 
-[node name="GameManager" type="Node2D"]
+[node name="GameManager" type="Node2D" node_paths=PackedStringArray("_speed_timer")]
 script = ExtResource("1_oqrf8")
 _max_speed = 1500.0
+_speed_timer = NodePath("RaiseSpeedTimer")
 
 [node name="RaiseSpeedTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [connection signal="timeout" from="RaiseSpeedTimer" to="." method="_on_timer_timeout"]
