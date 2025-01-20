@@ -1,0 +1,174 @@
+[gd_scene load_steps=22 format=3 uid="uid://cfr8r7hv857gk"]
+
+[ext_resource type="Script" path="res://precomp_shaders/loading_screen.gd" id="1_d080o"]
+[ext_resource type="Texture2D" uid="uid://cunijidgvgcx4" path="res://precomp_shaders/Logo_tumati_games_red.png" id="1_irxtl"]
+[ext_resource type="PackedScene" uid="uid://0ebmwcsniah0" path="res://common/fx/shock_wave/shock_wave.tscn" id="2_7f7uj"]
+[ext_resource type="PackedScene" uid="uid://bqw78eklcwjhc" path="res://levels/game.tscn" id="2_ubju0"]
+[ext_resource type="PackedScene" uid="uid://damcjubyi1b17" path="res://common/fx/flash/flash.tscn" id="3_dmmbi"]
+[ext_resource type="PackedScene" uid="uid://1g4yt2hv1ew2" path="res://entities/coin/coin.tscn" id="4_tx4lg"]
+[ext_resource type="PackedScene" uid="uid://4etsb5ab5c1x" path="res://entities/items/flying_item.tscn" id="5_fj0aj"]
+[ext_resource type="PackedScene" uid="uid://b4wxaxf5ttrw1" path="res://entities/missile_launcher/missile.tscn" id="6_b67um"]
+[ext_resource type="PackedScene" uid="uid://yiojagcmj4p1" path="res://entities/player/player.tscn" id="7_y86xi"]
+[ext_resource type="PackedScene" uid="uid://dgpu724mm3tc4" path="res://obstacles/laser_barrier/laser_barrier.tscn" id="9_8veka"]
+[ext_resource type="Texture2D" uid="uid://dm7lpet32kq62" path="res://obstacles/lasers_trap/art/circle_02.png" id="11_o87bm"]
+[ext_resource type="Texture2D" uid="uid://dvx4vtfloop6n" path="res://obstacles/lasers_trap/art/circle_05.png" id="12_iytlc"]
+[ext_resource type="Shader" path="res://obstacles/lasers_trap/laser.gdshader" id="13_355gd"]
+[ext_resource type="Texture2D" uid="uid://bxgngm1ch476j" path="res://obstacles/lasers_trap/resources/laser_noise.tres" id="14_5c12e"]
+[ext_resource type="Texture2D" uid="uid://bqg07lahon10e" path="res://obstacles/lasers_trap/art/laserRedHorizontal.png" id="15_b2xg7"]
+
+[sub_resource type="Curve" id="Curve_w4exd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.81982, 0), -2.47847, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b4na6"]
+curve = SubResource("Curve_w4exd")
+
+[sub_resource type="Curve" id="Curve_ikj54"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.326316), -1.83609, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mm37n"]
+curve = SubResource("Curve_ikj54")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uwlk6"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 33.655
+emission_ring_radius = 150.0
+emission_ring_inner_radius = 100.0
+orbit_velocity_min = 0.614
+orbit_velocity_max = 1.212
+radial_velocity_min = -377.95
+radial_velocity_max = -94.49
+gravity = Vector3(0, 0, 0)
+scale_min = 0.05
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_mm37n")
+color = Color(1, 0.6515, 0.49, 1)
+alpha_curve = SubResource("CurveTexture_b4na6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_at5ld"]
+shader = ExtResource("13_355gd")
+shader_parameter/strength = 4.0
+shader_parameter/color = Color(0.82, 0.27675, 0.205, 1)
+shader_parameter/noise = ExtResource("14_5c12e")
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d080o")
+_next_scene = ExtResource("2_ubju0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="BG" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14, 0.14, 0.14, 1)
+
+[node name="Logo" type="TextureRect" parent="CanvasLayer/BG"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_irxtl")
+stretch_mode = 5
+
+[node name="Materials" type="Node" parent="."]
+
+[node name="ShockWave" parent="Materials" instance=ExtResource("2_7f7uj")]
+position = Vector2(416, 256)
+script = null
+
+[node name="GPUParticles2D" parent="Materials/ShockWave" index="0"]
+emitting = true
+one_shot = false
+
+[node name="Flash" parent="Materials" instance=ExtResource("3_dmmbi")]
+position = Vector2(416, 256)
+script = null
+
+[node name="CanvasLayer" parent="Materials/Flash" index="0"]
+layer = -100
+
+[node name="Coin" parent="Materials" instance=ExtResource("4_tx4lg")]
+position = Vector2(416, 256)
+script = null
+
+[node name="FlyingItem" parent="Materials" instance=ExtResource("5_fj0aj")]
+position = Vector2(416, 256)
+script = null
+
+[node name="Missile" parent="Materials" instance=ExtResource("6_b67um")]
+position = Vector2(416, 256)
+script = null
+
+[node name="Warning" parent="Materials/Missile/AlertDisplay" index="1"]
+visible = true
+
+[node name="Player" parent="Materials" instance=ExtResource("7_y86xi")]
+position = Vector2(816, 536)
+script = null
+
+[node name="Fire" parent="Materials/Player" index="2"]
+visible = true
+
+[node name="Shield" parent="Materials/Player" index="4"]
+visible = true
+
+[node name="EngineSmoke" parent="Materials/Player" index="5"]
+emitting = true
+
+[node name="FailSmoke" parent="Materials/Player" index="6"]
+emitting = true
+one_shot = false
+
+[node name="LaserBarrier" parent="Materials" instance=ExtResource("9_8veka")]
+position = Vector2(416, 256)
+script = null
+
+[node name="Circle" type="Sprite2D" parent="Materials"]
+self_modulate = Color(1, 0.358333, 0.23, 1)
+z_index = -1
+position = Vector2(960, 80)
+texture = ExtResource("11_o87bm")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Materials"]
+z_index = -1
+position = Vector2(960, 80)
+rotation = -1.57123
+skew = 0.000434279
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_uwlk6")
+texture = ExtResource("12_iytlc")
+explosiveness = 1.0
+
+[node name="Laser" type="Sprite2D" parent="Materials"]
+self_modulate = Color(1, 0.4, 0.4, 1)
+z_index = -10
+material = SubResource("ShaderMaterial_at5ld")
+position = Vector2(960, 80)
+scale = Vector2(24, 0.2)
+texture = ExtResource("15_b2xg7")
+
+[editable path="Materials/ShockWave"]
+[editable path="Materials/Flash"]
+[editable path="Materials/Missile"]
+[editable path="Materials/Player"]

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Runaway Saucer"
 config/tags=PackedStringArray("20_games_challenge")
-run/main_scene="res://levels/game.tscn"
+run/main_scene="res://precomp_shaders/loading_screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
