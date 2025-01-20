@@ -113,6 +113,10 @@ layer = -100
 position = Vector2(416, 256)
 script = null
 
+[node name="GPUParticles2D" parent="Materials/Coin" index="4"]
+emitting = true
+one_shot = false
+
 [node name="FlyingItem" parent="Materials" instance=ExtResource("5_fj0aj")]
 position = Vector2(416, 256)
 script = null
@@ -171,5 +175,6 @@ texture = ExtResource("15_b2xg7")
 
 [editable path="Materials/ShockWave"]
 [editable path="Materials/Flash"]
+[editable path="Materials/Coin"]
 [editable path="Materials/Missile"]
 [editable path="Materials/Player"]
