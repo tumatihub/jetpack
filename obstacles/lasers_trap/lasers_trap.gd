@@ -42,6 +42,7 @@ func _start_shooting() -> void:
 func _exit_cannons() -> void:
 	for idx in _available_traps.traps:
 		_laser_traps[idx].exit()
+	get_tree().create_timer(2).timeout.connect(queue_free)
 
 func _on_finished_entering() -> void:
 	_start_shooting()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6i0ejs3tqsuo"]
+[gd_scene load_steps=3 format=3 uid="uid://b6i0ejs3tqsuo"]
 
 [ext_resource type="PackedScene" uid="uid://1g4yt2hv1ew2" path="res://entities/coin/coin.tscn" id="1_3027t"]
+[ext_resource type="Script" path="res://utils/queue_orphan.gd" id="2_0a7x8"]
 
 [node name="CoinGroupLarge" type="Node2D"]
 
@@ -50,6 +51,9 @@ position = Vector2(-264, 0)
 [node name="Coin15" parent="Line" instance=ExtResource("1_3027t")]
 position = Vector2(-528, 0)
 
+[node name="QueueOrphan" type="Node" parent="Line"]
+script = ExtResource("2_0a7x8")
+
 [node name="Line4" type="Node2D" parent="."]
 position = Vector2(0, 176)
 
@@ -96,6 +100,9 @@ position = Vector2(-264, 0)
 
 [node name="Coin15" parent="Line4" instance=ExtResource("1_3027t")]
 position = Vector2(-528, 0)
+
+[node name="QueueOrphan" type="Node" parent="Line4"]
+script = ExtResource("2_0a7x8")
 
 [node name="Line2" type="Node2D" parent="."]
 position = Vector2(-40, -88)
@@ -144,6 +151,9 @@ position = Vector2(-264, 0)
 [node name="Coin15" parent="Line2" instance=ExtResource("1_3027t")]
 position = Vector2(-528, 0)
 
+[node name="QueueOrphan" type="Node" parent="Line2"]
+script = ExtResource("2_0a7x8")
+
 [node name="Line3" type="Node2D" parent="."]
 position = Vector2(-40, 88)
 
@@ -190,3 +200,9 @@ position = Vector2(-264, 0)
 
 [node name="Coin15" parent="Line3" instance=ExtResource("1_3027t")]
 position = Vector2(-528, 0)
+
+[node name="QueueOrphan" type="Node" parent="Line3"]
+script = ExtResource("2_0a7x8")
+
+[node name="QueueOrphan" type="Node" parent="."]
+script = ExtResource("2_0a7x8")
